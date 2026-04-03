@@ -30,20 +30,12 @@ spec:
             image:
               repository: adguard/adguardhome
               tag: v0.107.73
-            env:
-              # Force AdGuard Home to use port 3000 for its web interface
-              # so it matches the chart's probes.
-              ADGUARD_PORT: "3000"
     service:
       main:
         controller: main
         ports:
           http:
-            port: 3000
-      dns-udp:
-        enabled: true
-        controller: main
-        type: LoadBalancer
+            port: 80
     persistence:
       config:
         enabled: true
