@@ -10,21 +10,23 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 2.  **K3d Cluster Creation:**
     - [x] Create a local cluster: `k3d cluster create homelab-sandbox --port "8080:80@loadbalancer" --port "8443:443@loadbalancer"`.
 3.  **Secret Management (SOPS + Age):**
-    - [ ] Install `sops` and `age` CLI tools.
-    - [ ] Generate an Age key pair for the cluster.
-    - [ ] Create a Kubernetes secret in the cluster containing the Age private key for Flux to use.
+    - [x] Install `sops` and `age` CLI tools.
+    - [x] Generate an Age key pair for the cluster.
+    - [x] Create a Kubernetes secret in the cluster containing the Age private key for Flux to use.
 4.  **FluxCD Bootstrap:**
     - [x] Install Flux CLI.
-    - [ ] Bootstrap Flux into the `homelab-sandbox` cluster using the GitHub repository.
+    - [x] Bootstrap Flux into the `homelab-sandbox` cluster using the GitHub repository.
 5.  **Validation:**
-    - [ ] `flux get sources git` shows successful reconciliation.
-    - [ ] `kubectl get nodes` shows the K3d node(s).
+    - [x] `flux get sources git` shows successful reconciliation.
+    - [x] `kubectl get nodes` shows the K3d node(s).
 
 ## Iteration 2: Internal DNS & Ingress
 **Goal:** Setup local DNS resolution and routing within the sandbox.
 
 1.  **Deploy AdGuard Home/Pi-hole:**
-    - [ ] Create a `HelmRelease` for AdGuard Home in `/kubernetes/apps/networking`.
+    - [x] Create a `HelmRelease` for AdGuard Home in `/kubernetes/apps/networking`.
+    - [x] Configure basic DNS and Web UI settings.
+    - [x] Verify pod health and reachability.
 2.  **Deploy Ingress-Nginx:**
     - [ ] Use the community Helm chart to deploy the ingress controller in `/kubernetes/infrastructure`.
 3.  **Validation:**
