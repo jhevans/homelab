@@ -6,13 +6,17 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 **Goal:** Establish the GitOps repository and a local K3d cluster for testing.
 
 1.  **Repository Setup:**
-    - [ ] Initialize directory structure: `/kubernetes/apps`, `/kubernetes/flux`, `/kubernetes/infrastructure`, `/nixos/hosts`, `/nixos/modules`.
+    - [x] Initialize directory structure: `/kubernetes/apps`, `/kubernetes/flux`, `/kubernetes/infrastructure`, `/nixos/hosts`, `/nixos/modules`.
 2.  **K3d Cluster Creation:**
-    - [ ] Create a local cluster: `k3d cluster create homelab-sandbox --port "8080:80@loadbalancer" --port "8443:443@loadbalancer"`.
-3.  **FluxCD Bootstrap:**
-    - [ ] Install Flux CLI.
-    - [ ] Bootstrap Flux into the `homelab-sandbox` cluster.
-4.  **Validation:**
+    - [x] Create a local cluster: `k3d cluster create homelab-sandbox --port "8080:80@loadbalancer" --port "8443:443@loadbalancer"`.
+3.  **Secret Management (SOPS + Age):**
+    - [ ] Install `sops` and `age` CLI tools.
+    - [ ] Generate an Age key pair for the cluster.
+    - [ ] Create a Kubernetes secret in the cluster containing the Age private key for Flux to use.
+4.  **FluxCD Bootstrap:**
+    - [x] Install Flux CLI.
+    - [ ] Bootstrap Flux into the `homelab-sandbox` cluster using the GitHub repository.
+5.  **Validation:**
     - [ ] `flux get sources git` shows successful reconciliation.
     - [ ] `kubectl get nodes` shows the K3d node(s).
 
