@@ -20,6 +20,8 @@ spec:
     remediation:
       retries: 3
   values:
+    # AdGuard Home specific values
+    # The gabe565 chart uses the bjw-s app-template structure
     controllers:
       main:
         strategy: RollingUpdate
@@ -35,12 +37,10 @@ spec:
           http:
             port: 3000
       dns-udp:
+        enabled: true
         controller: main
         type: LoadBalancer
-        ports:
-          dns:
-            port: 53
-            protocol: UDP
+        # The chart already defines the ports, we just ensure it is a LoadBalancer
     persistence:
       config:
         enabled: true
