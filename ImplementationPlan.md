@@ -39,11 +39,14 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 **Goal:** Monitor cluster health and performance from the start.
 
 1.  **Prometheus & Grafana:**
-    - [ ] Deploy the `kube-prometheus-stack` via Helm in `/kubernetes/infrastructure`.
+    - [x] Deploy the `kube-prometheus-stack` via Helm in `/kubernetes/infrastructure`.
 2.  **Uptime Kuma:**
     - [x] Deploy Uptime Kuma to monitor service availability.
-3.  **Validation:**
+3.  **Loki & Promtail (Logging):**
+    - [x] Deploy the `loki-stack` to collect and store logs from all pods.
+4.  **Validation:**
     - [ ] Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
+    - [ ] Query pod logs in the Grafana "Explore" view using the Loki data source.
     - [x] Configure a test alert in Uptime Kuma.
 
 ## Iteration 4: The NixOS Core (Mini PC)
