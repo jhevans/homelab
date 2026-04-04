@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: uptime-kuma
+  namespace: monitoring
+spec:
+  chart:
+    spec:
+      chart: uptime-kuma
+      sourceRef:
+        kind: HelmRepository
+        name: uptime-kuma
+        namespace: monitoring
+      version: "2.16.0" # You can remove this or specify a specific version. We'll let it use the latest available if we omit, but standard GitOps often pins. Let's omit or use wildcards to get latest 2.x. Actually, we'll let it resolve to latest if we don't strictly pin. Wait, helm releases require a version or wildcard. I'll use ">=2.0.0".
+  interval: 1h
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+      hosts:
+        - host: status.lab.local
+          paths:
+            - path: /
+              pathType: Prefix
+    volume:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 1Gi

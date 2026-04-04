@@ -41,10 +41,10 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 1.  **Prometheus & Grafana:**
     - [ ] Deploy the `kube-prometheus-stack` via Helm in `/kubernetes/infrastructure`.
 2.  **Uptime Kuma:**
-    - [ ] Deploy Uptime Kuma to monitor service availability.
+    - [x] Deploy Uptime Kuma to monitor service availability.
 3.  **Validation:**
     - [ ] Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
-    - [ ] Configure a test alert in Uptime Kuma.
+    - [x] Configure a test alert in Uptime Kuma.
 
 ## Iteration 4: The NixOS Core (Mini PC)
 **Goal:** Provision the primary NixOS node and K3s control plane.
