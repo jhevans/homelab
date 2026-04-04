@@ -38,3 +38,6 @@ spec:
     volumes:
       - name: headlamp-plugins
         emptyDir: {}
+    serviceAccount:
+      create: false
+      name: headlamp-admin
