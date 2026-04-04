@@ -27,11 +27,13 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [x] Create a `HelmRelease` for AdGuard Home in `/kubernetes/apps/networking`.
     - [x] Configure basic DNS and Web UI settings.
     - [x] Verify pod health and reachability.
-2.  **Deploy Ingress-Nginx:**
-    - [ ] Use the community Helm chart to deploy the ingress controller in `/kubernetes/infrastructure`.
+2.  **Configure Ingress (Traefik):**
+    - [ ] Leverage the built-in Traefik Ingress controller in K3s/K3d.
+    - [ ] Create `Ingress` resources to expose AdGuard Home (`adguard.lab.local`) and Headlamp (`headlamp.lab.local`).
 3.  **Validation:**
-    - [ ] Access the AdGuard Home UI via `localhost:8080`.
-    - [ ] Verify `curl -H "Host: test.lab.local" localhost:8080` routes correctly.
+    - [ ] Access the AdGuard Home UI via `http://adguard.lab.local:8080`.
+    - [ ] Access the Headlamp UI via `http://headlamp.lab.local:8080`.
+    - [ ] Verify `curl -H "Host: headlamp.lab.local" localhost:8080` routes correctly.
 
 ## Iteration 3: Observability (ASAP)
 **Goal:** Monitor cluster health and performance from the start.
