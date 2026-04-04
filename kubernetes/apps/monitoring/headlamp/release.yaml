@@ -32,9 +32,9 @@ spec:
         volumeMounts:
           - mountPath: /build/plugins
             name: headlamp-plugins
-    extraVolumeMounts:
+    volumeMounts:
       - mountPath: /build/plugins
         name: headlamp-plugins
-    extraVolumes:
+    volumes:
       - name: headlamp-plugins
         emptyDir: {}

@@ -23,4 +23,6 @@ This file contains foundational mandates and project-specific instructions for G
 
 ## Workflow Mandates
 - **Surgical Updates:** Minimize changes to only what is necessary for the task.
-- **Validation:** Always verify changes with tests and linting.
+- **Validation:** 
+  - Always verify changes with tests and linting.
+  - **Kubernetes Validation:** Before committing any changes to the `kubernetes/` directory, always run `flux build kustomization <name> --path <path>` (e.g., `flux build kustomization apps --path kubernetes/apps`) to ensure manifests are syntactically correct and correctly linked.
