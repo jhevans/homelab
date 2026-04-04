@@ -98,3 +98,11 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 4.  **Validation:**
     - [ ] Login to Home Assistant and discover local devices.
     - [ ] Stream a video from Jellyfin and verify hardware transcoding.
+
+## Future Backlog & Technical Debt
+- **Security:**
+  - [ ] Rotate Grafana admin password from default (`prom-operator`) to a SOPS-encrypted secret.
+  - [ ] Implement Authentik/Authelia for Unified SSO.
+- **Maintenance:**
+  - [ ] Configure automated backups for Postgres/Redis.
+
