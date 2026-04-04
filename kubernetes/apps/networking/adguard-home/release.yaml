@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: gabe565
-        namespace: flux-system
+        namespace: networking
   install:
     remediation:
       retries: 3
