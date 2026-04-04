@@ -12,4 +12,29 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: headlamp
-  interval: 1m0s
+  interval: 10m0s
+  values:
+    config:
+      pluginsDir: /build/plugins
+    initContainers:
+      - name: headlamp-plugins
+        image: ghcr.io/headlamp-k8s/headlamp-plugin-flux:latest
+        imagePullPolicy: Always
+        command:
+          - /bin/sh
+          - -c
+          - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/ && chown -R 100:101 /build
+        securityContext:
+          runAsUser: 0
+          runAsGroup: 0
+          runAsNonRoot: false
+          privileged: false
+        volumeMounts:
+          - mountPath: /build/plugins
+            name: headlamp-plugins
+    extraVolumeMounts:
+      - mountPath: /build/plugins
+        name: headlamp-plugins
+    extraVolumes:
+      - name: headlamp-plugins
+        emptyDir: {}
