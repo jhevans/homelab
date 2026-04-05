@@ -5,4 +5,4 @@ metadata:
   namespace: dashboard
 spec:
   interval: 2h
-  url: https://gethomepage.github.io/helm-charts
+  url: https://jameswynn.github.io/helm-charts
