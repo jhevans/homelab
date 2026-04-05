@@ -21,7 +21,7 @@ spec:
       webhook:
         image:
           repository: ghcr.io/muhlba91/external-dns-provider-adguard
-          tag: v8.0.0
+          tag: v11.0.2
         env:
           - name: ADGUARD_URL
             value: http://adguard-home.networking.svc.cluster.local
