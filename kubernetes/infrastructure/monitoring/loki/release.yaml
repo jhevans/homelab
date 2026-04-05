@@ -16,7 +16,9 @@ spec:
   values:
     loki:
       limits_config:
-        volume_enabled: true
+         allow_structured_metadata: true
+         volume_enabled: true
+         retention_period: 672h # 28 days retention
       persistence:
         enabled: true
         size: 2Gi
