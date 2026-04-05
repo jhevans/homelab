@@ -44,8 +44,17 @@ spec:
                 description: Local LLM Interface
       widgets:
         - kubernetes:
-            cluster: homelab
-            nodes: true
+            cluster:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
+              label: "homelab"
+            nodes:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
     ingress:
       main:
         enabled: true
