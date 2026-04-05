@@ -17,7 +17,7 @@ spec:
     ollama:
       enabled: false # Use our external Ollama instances
     ollamaUrls:
-      - "http://ollama-llama-3-2-1b.ai.svc.cluster.local:11434"
+      - "http://ollama-cpu.ai.svc.cluster.local:11434"
     pipelines:
       enabled: false # Optional: can enable for RAG/extra features later
     persistence:
