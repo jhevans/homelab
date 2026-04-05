@@ -23,6 +23,12 @@ spec:
     persistence:
       enabled: true
       size: 2Gi
+    service:
+      type: ClusterIP
+      main:
+        ports:
+          http:
+            port: 8080
     ingress:
       enabled: true
       annotations:
