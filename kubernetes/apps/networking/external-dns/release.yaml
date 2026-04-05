@@ -14,12 +14,14 @@ spec:
         name: external-dns
         namespace: networking
   values:
+    extraArgs:
+      - --webhook-provider-url=http://127.0.0.1:8888
     provider:
       name: webhook
       webhook:
         image:
           repository: ghcr.io/muhlba91/external-dns-provider-adguard
-          tag: 11.0.1
+          tag: v8.0.0
         env:
           - name: ADGUARD_URL
             value: http://adguard-home.networking.svc.cluster.local
