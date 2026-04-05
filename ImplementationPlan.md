@@ -107,5 +107,6 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
   - [ ] Rotate Grafana admin password from default (`prom-operator`) to a SOPS-encrypted secret.
   - [ ] Implement Authentik/Authelia for Unified SSO.
 - **Maintenance:**
+  - [ ] **CRITICAL: Exhaustive Version Audit.** Review every Helm chart and container image in the repository. Perform a live web search for each to ensure we are on the latest stable version. **DO NOT RELY ON MEMORY.**
   - [ ] Configure automated backups for Postgres/Redis.
 
