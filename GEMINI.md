@@ -26,3 +26,4 @@ This file contains foundational mandates and project-specific instructions for G
 - **Validation:** 
   - Always verify changes with tests and linting.
   - **Kubernetes Validation:** Before committing any changes to the `kubernetes/` directory, always run `flux build kustomization <name> --path <path>` (e.g., `flux build kustomization apps --path kubernetes/apps`) to ensure manifests are syntactically correct and correctly linked.
+  - **Dashboard Maintenance:** Whenever a new user-facing service is added to the cluster, its corresponding entry (name, icon, and URL) must be added to the `homepage` configuration in `kubernetes/apps/dashboard/homepage/`.

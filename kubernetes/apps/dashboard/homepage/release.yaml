@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: homepage
+  namespace: dashboard
+spec:
+  chart:
+    spec:
+      chart: homepage
+      sourceRef:
+        kind: HelmRepository
+        name: homepage
+        namespace: dashboard
+      version: "2.0.0"
+  interval: 1h
+  values:
+    config:
+      services:
+        - Networking:
+            - AdGuard Home:
+                icon: adguard-home.png
+                href: http://adguard.lab.local:8080
+                description: DNS Sinkhole & AdBlocker
+        - Monitoring:
+            - Headlamp:
+                icon: headlamp.png
+                href: http://headlamp.lab.local:8080
+                description: Kubernetes Dashboard
+            - Grafana:
+                icon: grafana.png
+                href: http://grafana.lab.local:8080
+                description: Metrics & Dashboards
+            - Uptime Kuma:
+                icon: uptime-kuma.png
+                href: http://status.lab.local:8080
+                description: Service Status Page
+        - AI:
+            - Open WebUI:
+                icon: open-webui.png
+                href: http://ai.lab.local:8080
+                description: Local LLM Interface
+      widgets:
+        - kubernetes:
+            cluster: homelab
+            nodes: true
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: web
+        hosts:
+          - host: lab.local
+            paths:
+              - path: /
+                pathType: Prefix
