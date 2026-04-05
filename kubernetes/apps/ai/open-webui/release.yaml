@@ -1,0 +1,31 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: open-webui
+  namespace: ai
+spec:
+  chart:
+    spec:
+      chart: open-webui
+      sourceRef:
+        kind: HelmRepository
+        name: open-webui
+        namespace: ai
+      version: "5.1.0"
+  interval: 1h
+  values:
+    ollama:
+      enabled: false # Use our external Ollama instances
+    ollamaUrls:
+      - "http://ollama-llama-3-2-1b.ai.svc.cluster.local:11434"
+    pipelines:
+      enabled: false # Optional: can enable for RAG/extra features later
+    persistence:
+      enabled: true
+      size: 2Gi
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+      host: ai.lab.local
+      path: /
