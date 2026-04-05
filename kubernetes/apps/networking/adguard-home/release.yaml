@@ -33,18 +33,9 @@ spec:
     service:
       main:
         controller: main
-        type: LoadBalancer # Ready for MetalLB on Mini-PC
         ports:
           http:
             port: 80
-          dns-tcp:
-            enabled: true
-            port: 53
-            protocol: TCP
-          dns-udp:
-            enabled: true
-            port: 53
-            protocol: UDP
     persistence:
       config:
         enabled: true
