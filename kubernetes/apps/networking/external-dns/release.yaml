@@ -1,0 +1,30 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: networking
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: external-dns
+      version: "1.15.0"
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns
+        namespace: networking
+  values:
+    provider: adguard
+    adguard:
+      url: http://adguard-home.networking.svc.cluster.local
+      user: admin
+      password: admin # Update this if you changed it in the wizard
+    policy: sync # Allows External-DNS to create AND delete records
+    registry: txt
+    txtOwnerId: homelab-sandbox
+    domainFilters:
+      - lab.local
+    sources:
+      - ingress
+    # Since we are in K3d, we tell it to look at the LoadBalancer IP of Traefik
+    connectorSourceServer: http://traefik.kube-system.svc.cluster.local
