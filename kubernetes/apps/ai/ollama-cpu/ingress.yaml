@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ollama-cpu
+  namespace: ai
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+  - host: ollama.lab.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: ollama-cpu
+            port:
+              number: 11434
+        path: /
+        pathType: Prefix

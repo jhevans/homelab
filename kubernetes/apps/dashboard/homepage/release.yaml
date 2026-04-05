@@ -42,6 +42,10 @@ spec:
                 icon: open-webui.png
                 href: http://ai.lab.local:8080
                 description: Local LLM Interface
+            - Ollama (CPU):
+                icon: ollama.png
+                href: http://ollama.lab.local:8080
+                description: AI Backend (CPU)
       bookmarks:
         - Developer:
             - Github:
