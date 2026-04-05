@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ollama
+  namespace: ai
+spec:
+  chart:
+    spec:
+      chart: ollama
+      sourceRef:
+        kind: HelmRepository
+        name: ollama-helm
+        namespace: ai
+      version: "0.68.0" # You can use a specific version or wildcard
+  interval: 1h
+  values:
+    ollama:
+      models:
+        - llama3.2:1b
+    persistentVolume:
+      enabled: true
+      size: 10Gi
+    # Default is CPU only, which is what we want for K3d sandbox
