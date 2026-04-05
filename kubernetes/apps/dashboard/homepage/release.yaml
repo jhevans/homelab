@@ -43,6 +43,10 @@ spec:
                 href: http://ai.lab.local:8080
                 description: Local LLM Interface
       widgets:
+        - datetime:
+            text_size: xl
+            format:
+              timeStyle: short
         - kubernetes:
             cluster:
               show: true
