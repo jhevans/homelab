@@ -42,6 +42,19 @@ spec:
                 icon: open-webui.png
                 href: http://ai.lab.local:8080
                 description: Local LLM Interface
+      bookmarks:
+        - Developer:
+            - Github:
+                - abbr: GH
+                  href: https://github.com/jhevans/homelab        
+        - Entertainment:
+            - YouTube:
+                - abbr: YT
+                  href: https://youtube.com/
+        - Productivity:
+            - Gemini:
+                - abbr: GI
+                  href: https://gemini.google.com/
       widgets:
         - datetime:
             text_size: xl
