@@ -105,6 +105,14 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Stream a video from Jellyfin and verify hardware transcoding.
 
 ## Future Backlog & Technical Debt
+### Autonomous Research & Operations Center (AROC)
+The phased implementation of the agentic workforce is detailed in **[AROC.md](./AROC.md)**.
+
+* [ ] **Phase 1: The Intelligent Foundation** (Inference Proxy, Vector DB, Event Bus, Registry).
+* [ ] **Phase 2: The Agentic Workforce** (Dev, Auditor, Scout, Knowledge, Red Team Agents).
+* [ ] **Phase 3: Daily Utility & "LifeOps"** (Curation, Finance, Memex, FinOps).
+
+### Technical Debt & Maintenance
 - **Security:**
   - [ ] Rotate Grafana admin password from default (`prom-operator`) to a SOPS-encrypted secret.
   - [ ] Implement Authentik/Authelia for Unified SSO.

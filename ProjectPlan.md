@@ -28,25 +28,19 @@ The execution of this blueprint is divided into specialized documents:
 
 *   **[ImplementationPlan.md](./ImplementationPlan.md):** The phased, iterative roadmap for building the lab.
 *   **[Software.md](./Software.md):** The definitive list of the software stack and technology choices.
+*   **[AROC.md](./AROC.md):** The blueprint for the Autonomous Research & Operations Center (AI Agents).
 
 ---
 
-## 4. Appendices and Technical Data
+## 4. Vision: Autonomous Research & Operations Center
+The long-term goal is to evolve this lab into an **Autonomous Research & Operations Center (AROC)**. This center leverages local LLMs and agentic workflows to automate infrastructure management, knowledge synthesis, and "LifeOps."
 
-### DNS Resolution Flow
-1.  **Request:** User types `forgejo.lab.local`.
-2.  **Lookup:** Device asks **Pi-hole** (connected via VPN/LAN).
-3.  **Discovery:** Pi-hole returns the Mini PC IP (provided by **External-DNS**).
-4.  **Routing:** **Ingress-Nginx** receives the request and routes it to the Forgejo Pod based on the `Host` header.
-
-### The "Gemini Sandbox" Configuration
-* **Environment:** Docker Container running a Nix-enabled Linux.
-* **Permission:** Volume-mount only specific project directories.
-* **Network:** Connect container to the WireGuard network to allow the AI to "see" cluster services for debugging.
+See the full architectural blueprint and integration workflow in **[AROC.md](./AROC.md)**.
 
 ---
 
-### Other Information
+## 5. Appendices and Technical Data
+
 * **Backup Strategy:** Mirror your internal Forgejo repo to GitHub automatically. Keep a physical printout of your **WireGuard Private Key** and **NixOS Disk Encryption** passwords in a safe place.
 * **Expansion:** As the lab grows, the Mini PC can be upgraded with more RAM (32GB+), and the Raspberry Pis can be utilized as high-availability "witness" nodes for the K3s database.
 

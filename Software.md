@@ -36,6 +36,9 @@ Based on our deep dive, here is the categorized list of the software stack for y
 * **Immich:** A high-performance self-hosted backup solution for your photos and videos (the Google Photos killer).
 * **Frigate NVR:** AI-powered CCTV software. It uses your GPU to detect people and objects in real-time, sending smart alerts to your phone.
 
+## 7. Autonomous Operations Center (AOC) Components
+The software stack for the agentic layer, including LLM gateways, vector databases, and event buses, is detailed in **[AROC.md](./AROC.md)**.
+
 ---
 
 ### 💡 Software Philosophy Summary
