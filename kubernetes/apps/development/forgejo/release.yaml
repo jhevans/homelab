@@ -25,6 +25,11 @@ spec:
       enabled: false
     postgresql-ha:
       enabled: false
+    # Disable built-in redis to avoid image pull errors
+    redis:
+      enabled: false
+    redis-cluster:
+      enabled: false
     # Basic configuration for Forgejo
     gitea:
       config:
