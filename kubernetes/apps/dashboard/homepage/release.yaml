@@ -46,6 +46,11 @@ spec:
                 icon: ollama.png
                 href: http://ollama.lab.local:8080
                 description: AI Backend (CPU)
+        - Development:
+            - Forgejo:
+                icon: forgejo.png
+                href: http://forgejo.lab.local:8080
+                description: Internal Git Forge
       bookmarks:
         - Developer:
             - Github:
