@@ -21,10 +21,14 @@ spec:
       retries: 3
   values:
     # Disable built-in subcharts
-    postgresql: false
-    postgresql-ha: false
-    redis: false
-    redis-cluster: false
+    postgresql:
+      enabled: false
+    postgresql-ha:
+      enabled: false
+    redis:
+      enabled: false
+    redis-cluster:
+      enabled: false
     # Basic configuration for Forgejo
     gitea:
       config:
