@@ -105,8 +105,8 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Stream a video from Jellyfin and verify hardware transcoding.
 
 ## Future Backlog & Technical Debt
-### Autonomous Research & Operations Center (AROC)
-The phased implementation of the agentic workforce is detailed in **[AROC.md](./AROC.md)**.
+### Autonomous Research & Operations Center (AROC) - [DRAFT/TBC]
+The potential, phased implementation of the agentic workforce is detailed in the **[AROC.md](./AROC.md) (TBC)** brainstorm document.
 
 * [ ] **Phase 1: The Intelligent Foundation** (Inference Proxy, Vector DB, Event Bus, Registry).
 * [ ] **Phase 2: The Agentic Workforce** (Dev, Auditor, Scout, Knowledge, Red Team Agents).

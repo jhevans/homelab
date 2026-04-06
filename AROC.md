@@ -1,6 +1,10 @@
 # 🤖 Autonomous Research & Operations Center (AROC)
 
-This document serves as the authoritative blueprint for the agentic layer of the home lab, moving from foundational infrastructure to high-level "LifeOps" utility.
+> [!CAUTION]
+> **STATUS: TBC (To Be Confirmed)**
+> This is a **machine-generated blueprint** intended for spurring ideas and brainstorming. It is **NOT** a concrete implementation plan and requires manual review and validation before any action is taken.
+
+This document serves as the high-level vision for the agentic layer of the home lab, moving from foundational infrastructure to high-level "LifeOps" utility.
 
 ---
 

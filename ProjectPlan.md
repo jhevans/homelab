@@ -28,14 +28,14 @@ The execution of this blueprint is divided into specialized documents:
 
 *   **[ImplementationPlan.md](./ImplementationPlan.md):** The phased, iterative roadmap for building the lab.
 *   **[Software.md](./Software.md):** The definitive list of the software stack and technology choices.
-*   **[AROC.md](./AROC.md):** The blueprint for the Autonomous Research & Operations Center (AI Agents).
+*   **[AROC.md](./AROC.md) (TBC):** The machine-generated blueprint for the Autonomous Research & Operations Center.
 
 ---
 
-## 4. Vision: Autonomous Research & Operations Center
+## 4. Vision: Autonomous Research & Operations Center (TBC)
 The long-term goal is to evolve this lab into an **Autonomous Research & Operations Center (AROC)**. This center leverages local LLMs and agentic workflows to automate infrastructure management, knowledge synthesis, and "LifeOps."
 
-See the full architectural blueprint and integration workflow in **[AROC.md](./AROC.md)**.
+See the machine-generated vision and integration workflow in **[AROC.md](./AROC.md) (TBC)**.
 
 ---
 
