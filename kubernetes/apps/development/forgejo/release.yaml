@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: forgejo
-      version: "12.3.0"
+      version: "16.2.0"
       sourceRef:
         kind: HelmRepository
         name: forgejo
@@ -20,6 +20,11 @@ spec:
     remediation:
       retries: 3
   values:
+    # Disable built-in postgresql to avoid pgpool errors (using sqlite3)
+    postgresql:
+      enabled: false
+    postgresql-ha:
+      enabled: false
     # Basic configuration for Forgejo
     gitea:
       config:
