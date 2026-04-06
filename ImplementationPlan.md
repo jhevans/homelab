@@ -92,13 +92,15 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 ## Iteration 7: Personal Services (The "Home" in Home Lab)
 **Goal:** Deploy daily-use applications.
 
-1.  **Home Assistant:**
+1.  **Forgejo:**
+    - [x] Deploy Forgejo as the internal Git forge.
+2.  **Home Assistant:**
     - [ ] Deploy with necessary hardware passthrough.
-2.  **Jellyfin:**
+3.  **Jellyfin:**
     - [ ] Deploy with GPU acceleration enabled.
-3.  **Immich:**
+4.  **Immich:**
     - [ ] Setup Postgres and Redis dependencies.
-4.  **Validation:**
+5.  **Validation:**
     - [ ] Login to Home Assistant and discover local devices.
     - [ ] Stream a video from Jellyfin and verify hardware transcoding.
 
