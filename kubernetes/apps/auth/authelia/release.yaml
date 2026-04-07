@@ -23,6 +23,10 @@ spec:
       authentication_backend:
         file:
           path: /config/users.yml
+      session:
+        cookies:
+          - domain: lab.local
+            authelia_url: https://auth.lab.local
       storage:
         local:
           path: /config/db.sqlite3
