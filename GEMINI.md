@@ -9,6 +9,7 @@ This file contains foundational mandates and project-specific instructions for G
   - [ProjectPlan.md](./ProjectPlan.md): The authoritative architectural blueprint.
   - [ImplementationPlan.md](./ImplementationPlan.md): The phased execution roadmap.
   - [PHILOSOPHY.md](./PHILOSOPHY.md): The project's guiding ethos and living principles.
+  - [GOTCHAS.md](./GOTCHAS.md): A collection of project-specific quirks and common issues.
 - **Mandate:** All changes must align with these principles and implementation phases. Unless explicitly marked as a "firm unbreakable principle", the instructions in this and other files should be treated as advice, guidance, or our current best knowledge. This is a living document that will evolve.
 
 ## Project Ethos & Guiding Philosophy (Living Guidance)
