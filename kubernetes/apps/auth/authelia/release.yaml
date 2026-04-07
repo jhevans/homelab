@@ -16,7 +16,7 @@ spec:
   values:
     domain: lab.local
     secret:
-      disabled: true # Use disabled: true instead of generate: false
+      existingSecret: authelia-secrets # Use our secret
     configMap:
       access_control:
         default_policy: one_factor
@@ -30,24 +30,7 @@ spec:
         filesystem:
           filename: /config/notification.txt
     
-    pod:
-      env:
-        - name: AUTHELIA_SESSION_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: authelia-secrets
-              key: SESSION_SECRET
-        - name: AUTHELIA_JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: authelia-secrets
-              key: JWT_SECRET
-        - name: AUTHELIA_STORAGE_ENCRYPTION_KEY
-          valueFrom:
-            secretKeyRef:
-              name: authelia-secrets
-              key: STORAGE_ENCRYPTION_KEY
-
+    # We mount users.yml manually
     volumes:
       - name: users-db
         configMap:
