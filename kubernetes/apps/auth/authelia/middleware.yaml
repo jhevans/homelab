@@ -2,10 +2,10 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: authelia
-  namespace: networking
+  namespace: auth
 spec:
   forwardAuth:
-    address: http://authelia.networking.svc.cluster.local:9091/api/verify?rd=https://auth.lab.local/
+    address: http://authelia.auth.svc.cluster.local:9091/api/verify?rd=https://auth.lab.local/
     trustForwardHeader: true
     authResponseHeaders:
       - Remote-User

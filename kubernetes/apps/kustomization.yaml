@@ -6,3 +6,4 @@ resources:
   - ai
   - dashboard
   - development
+  - auth

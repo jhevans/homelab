@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: authelia
-  namespace: networking
+  namespace: auth
 spec:
   interval: 15m
   chart:
@@ -12,16 +12,13 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: authelia
-        namespace: networking
+        namespace: auth
   values:
     domain: lab.local
     configMap:
       authentication_backend:
         file:
           path: /config/users.yml
-      # session:
-      #   secret: authelia-secrets # Use our secret
-      #   secret_key: SESSION_SECRET
       storage:
         local:
           path: /config/db.sqlite3
@@ -29,7 +26,6 @@ spec:
         filesystem:
           filename: /config/notification.txt
     
-    # Use environment variables from our secret for the required keys
     pod:
       env:
         - name: AUTHELIA_SESSION_SECRET
@@ -48,7 +44,6 @@ spec:
               name: authelia-secrets
               key: STORAGE_ENCRYPTION_KEY
 
-    # Mount the users.yml ConfigMap
     volumes:
       - name: users-db
         configMap:
