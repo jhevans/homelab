@@ -6,6 +6,7 @@ resources:
   - release.yaml
   - middleware.yaml
   - secrets.yaml
+  - ingress.yaml
 
 configMapGenerator:
   - name: authelia-users

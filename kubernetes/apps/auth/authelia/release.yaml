@@ -46,11 +46,4 @@ spec:
       size: 1Gi
       storageClass: local-path
     ingress:
-      enabled: true
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: web
-      hosts:
-        - host: auth.lab.local
-          paths:
-            - path: /
-              pathType: Prefix
+      enabled: false
