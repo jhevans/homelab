@@ -16,7 +16,7 @@ spec:
   values:
     domain: lab.local
     secret:
-      generate: false # Disable chart-generated secrets
+      disabled: true # Use disabled: true instead of generate: false
     configMap:
       access_control:
         default_policy: one_factor
