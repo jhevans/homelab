@@ -104,6 +104,23 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Login to Home Assistant and discover local devices.
     - [ ] Stream a video from Jellyfin and verify hardware transcoding.
 
+## Iteration 8: Unified Authentication (SSO)
+**Goal:** Centralize user management and enable SSO across all lab services.
+
+1.  **Deploy Authentik or Authelia:**
+    - [ ] Research and select between Authentik (all-in-one, feature-rich) or Authelia (lightweight, simple).
+    - [ ] Deploy via Helm in `/kubernetes/apps/networking`.
+    - [ ] Configure a persistent database (Postgres) and Redis cache.
+2.  **Identity Provider Integration:**
+    - [ ] Configure LDAP or OIDC providers.
+    - [ ] Integrate with Forgejo, Grafana, and AdGuard Home.
+3.  **Security Hardening:**
+    - [ ] Enforce 2FA/MFA (WebAuthn/TOTP) for all services.
+    - [ ] Implement Geoblocking or "Level 2" authentication for external access.
+4.  **Validation:**
+    - [ ] Successfully login to Forgejo using the SSO provider.
+    - [ ] Verify that unauthenticated requests to protected services are redirected to the auth portal.
+
 ## Future Backlog & Technical Debt
 ### Autonomous Research & Operations Center (AROC) - [DRAFT/TBC]
 The potential, phased implementation of the agentic workforce is detailed in the **[AROC.md](./AROC.md) (TBC)** brainstorm document.
@@ -115,8 +132,10 @@ The potential, phased implementation of the agentic workforce is detailed in the
 ### Technical Debt & Maintenance
 - **Security:**
   - [ ] Rotate Grafana admin password from default (`prom-operator`) to a SOPS-encrypted secret.
-  - [ ] Implement Authentik/Authelia for Unified SSO.
+  - [ ] **Backlog:** Dedicated security posture review and hardening.
 - **Maintenance:**
   - [ ] **CRITICAL: Exhaustive Version Audit.** Review every Helm chart and container image in the repository. Perform a live web search for each to ensure we are on the latest stable version. **DO NOT RELY ON MEMORY.**
   - [ ] Configure automated backups for Postgres/Redis.
+  - [ ] **Backlog:** Implement robust, reliable alerting for all mission-critical services.
+  - [ ] **Backlog:** Design and implement energy-aware scheduling/workload shifting (e.g., maximize "free energy" usage).
 
