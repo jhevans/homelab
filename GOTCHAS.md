@@ -14,6 +14,11 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 - **Root Cause:** The Traefik installation on the current cluster (v2.x or v3.x) uses the `traefik.io/v1alpha1` API group.
 - **Solution:** Always verify the available API resources using `kubectl api-resources | grep middleware` before creating new manifests.
 
+## 🔐 Authelia v0.9.1+ Secret Keys
+- **Issue:** Authelia pod stuck in `ContainerCreating` with `MountVolume.SetUp failed` error.
+- **Root Cause:** The 0.9.1 chart expects specific key names in the `existingSecret` for its internal mounts.
+- **Solution:** Ensure the secret contains `identity_validation.reset_password.jwt.hmac.key`, `session.encryption.key`, and `storage.encryption.key`.
+
 ## 📁 ConfigMap Namespaces in Kustomize
 - **Issue:** `configMapGenerator` without an explicit `namespace` in the `Kustomization` file may cause reconciliation failures if the parent kustomization doesn't propagate the namespace correctly.
 - **Solution:** Explicitly set `namespace: <name>` in the `kustomization.yaml` of the application directory.
