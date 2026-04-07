@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: authelia
+  namespace: networking
+resources:
+  - repository.yaml
+  - release.yaml
+  - middleware.yaml
+  - secrets.yaml
+
+configMapGenerator:
+  - name: authelia-users
+    files:
+      - users.yml

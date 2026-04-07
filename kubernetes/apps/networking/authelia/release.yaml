@@ -1,0 +1,74 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authelia
+      version: 0.8.58
+      sourceRef:
+        kind: HelmRepository
+        name: authelia
+        namespace: networking
+  values:
+    domain: lab.local
+    configMap:
+      authentication_backend:
+        file:
+          path: /config/users.yml
+      # session:
+      #   secret: authelia-secrets # Use our secret
+      #   secret_key: SESSION_SECRET
+      storage:
+        local:
+          path: /config/db.sqlite3
+      notifier:
+        filesystem:
+          filename: /config/notification.txt
+    
+    # Use environment variables from our secret for the required keys
+    pod:
+      env:
+        - name: AUTHELIA_SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: SESSION_SECRET
+        - name: AUTHELIA_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: JWT_SECRET
+        - name: AUTHELIA_STORAGE_ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: STORAGE_ENCRYPTION_KEY
+
+    # Mount the users.yml ConfigMap
+    volumes:
+      - name: users-db
+        configMap:
+          name: authelia-users
+    volumeMounts:
+      - name: users-db
+        mountPath: /config/users.yml
+        subPath: users.yml
+        readOnly: true
+
+    persistence:
+      enabled: true
+      size: 1Gi
+      storageClass: local-path
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+      hosts:
+        - host: auth.lab.local
+          paths:
+            - path: /
+              pathType: Prefix
