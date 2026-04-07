@@ -15,31 +15,51 @@ spec:
         namespace: auth
   values:
     domain: lab.local
-    secret:
-      existingSecret: authelia-secrets # Use our secret
     configMap:
-      access_control:
-        default_policy: one_factor
-      authentication_backend:
-        file:
-          path: /config/users.yml
-      session:
-        cookies:
-          - domain: lab.local
-            authelia_url: https://auth.lab.local
-      storage:
-        local:
-          path: /config/db.sqlite3
-      notifier:
-        filesystem:
-          filename: /config/notification.txt
+      disabled: true
+    secret:
+      disabled: true
+      existingSecret: authelia-secrets
+
+    pod:
+      env:
+        - name: AUTHELIA_CONFIG_FILTERS
+          value: "template"
+        - name: X_AUTHELIA_CONFIG
+          value: "/config/configuration.yaml"
+        - name: AUTHELIA_SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: session_secret
+        - name: AUTHELIA_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: jwt_secret
+        - name: AUTHELIA_STORAGE_ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: storage_encryption_key
+        - name: AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: jwt_secret
     
-    # We mount users.yml manually
     volumes:
+      - name: authelia-config
+        configMap:
+          name: authelia-config
       - name: users-db
         configMap:
           name: authelia-users
     volumeMounts:
+      - name: authelia-config
+        mountPath: /config/configuration.yaml
+        subPath: configuration.yaml
+        readOnly: true
       - name: users-db
         mountPath: /config/users.yml
         subPath: users.yml

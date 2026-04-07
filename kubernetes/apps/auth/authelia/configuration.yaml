@@ -1,0 +1,33 @@
+# Authelia configuration.yaml
+server:
+  address: 'tcp://0.0.0.0:9091/'
+
+log:
+  level: 'info'
+
+authentication_backend:
+  file:
+    path: /config/users.yml
+
+session:
+  name: authelia_session
+  secret: "placeholder-secret" # Overridden by env var
+  cookies:
+    - domain: lab.local
+      authelia_url: https://auth.lab.local
+
+storage:
+  local:
+    path: /config/db.sqlite3
+  encryption_key: "placeholder-key" # Overridden by env var
+
+notifier:
+  filesystem:
+    filename: /config/notification.txt
+
+access_control:
+  default_policy: one_factor
+
+identity_validation:
+  reset_password:
+    jwt_secret: "placeholder-jwt" # Overridden by env var

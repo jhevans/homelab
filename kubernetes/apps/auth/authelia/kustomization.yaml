@@ -12,3 +12,6 @@ configMapGenerator:
   - name: authelia-users
     files:
       - users.yml
+  - name: authelia-config
+    files:
+      - configuration.yaml
