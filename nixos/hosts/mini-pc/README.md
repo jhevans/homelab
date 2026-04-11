@@ -5,7 +5,11 @@ This is the manual for turning this code into a live server. **Read this if the 
 ### **Prerequisites:**
 1.  **Hardware:** HP EliteDesk Mini PC connected to the network.
 2.  **USB:** A bootable NixOS 23.11+ Installer USB.
-3.  **SSH Key:** Have your public SSH key ready to replace the placeholder in `configuration.nix`.
+3.  **SSH Key:** Your public key is already in `configuration.nix`. To set up your private key on your laptop/workstation, run:
+    ```bash
+    sops -d secrets/ssh_backups.yaml | sed -n '/-----BEGIN/,/-----END/p' | sed 's/^    //' > ~/.ssh/id_homelab_mini_pc
+    chmod 600 ~/.ssh/id_homelab_mini_pc
+    ```
 
 ### **Phase 1: Initial Install**
 1.  Boot from the NixOS USB.

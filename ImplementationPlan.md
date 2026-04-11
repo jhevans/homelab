@@ -56,7 +56,7 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Create `nixos/hosts/mini-pc/configuration.nix`.
     - [ ] Enable K3s in `server` mode.
 2.  **Hardware Optimization:**
-    - [ ] Configure power management and SSH access.
+    - [x] Configure power management and SSH access.
 3.  **Validation:**
     - [ ] Boot Mini PC from NixOS installer, apply configuration.
     - [ ] Verify `kubectl get nodes` on the Mini PC shows itself as `Ready`.

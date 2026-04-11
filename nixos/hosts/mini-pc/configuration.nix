@@ -32,7 +32,7 @@
     description = "John Evans";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPyour-ssh-key-here" # REPLACE THIS
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIafTCgAfrYS9sv886yK7X3nlF2R6cdHMCD0x+EoH53V john@homelab"
     ];
   };
 
