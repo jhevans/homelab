@@ -11,7 +11,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # 2. Networking
-  networking.hostName = "mini-pc";
+  networking.hostName = "control-plane-01";
   networking.networkmanager.enable = true;
   
   # Static IP Configuration (matching IPAM.md)

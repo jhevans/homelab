@@ -1,4 +1,4 @@
-# 🛠️ NixOS Bootstrap Instructions: Mini-PC
+# 🛠️ NixOS Bootstrap Instructions: control-plane-01
 
 This is the manual for turning this code into a live server. **Read this if the session is lost.**
 
@@ -17,14 +17,14 @@ This is the manual for turning this code into a live server. **Read this if the 
     ```bash
     nixos-generate-config --root /mnt
     ```
-3.  **CRITICAL:** Copy the generated `/mnt/etc/nixos/hardware-configuration.nix` into this repository at `nixos/hosts/mini-pc/hardware-configuration.nix`.
+3.  **CRITICAL:** Copy the generated `/mnt/etc/nixos/hardware-configuration.nix` into this repository at `nixos/hosts/control-plane-01/hardware-configuration.nix`.
 4.  Clone this repository onto the installer:
     ```bash
     git clone https://github.com/jhevans/homelab.git /mnt/etc/nixos/homelab
     ```
 5.  Link your configuration:
     ```bash
-    ln -sf /mnt/etc/nixos/homelab/nixos/hosts/mini-pc/configuration.nix /mnt/etc/nixos/configuration.nix
+    ln -sf /mnt/etc/nixos/homelab/nixos/hosts/control-plane-01/configuration.nix /mnt/etc/nixos/configuration.nix
     ```
 6.  Install:
     ```bash
