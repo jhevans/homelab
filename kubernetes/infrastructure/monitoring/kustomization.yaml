@@ -9,3 +9,4 @@ resources:
   - loki
   - monitors.yaml
   - traefik-monitor.yaml
+  - flux-monitoring.yaml

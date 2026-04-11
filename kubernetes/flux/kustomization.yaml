@@ -4,4 +4,3 @@ resources:
 - flux-system
 - apps.yaml
 - infrastructure.yaml
-- flux-monitoring.yaml
