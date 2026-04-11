@@ -3,13 +3,18 @@
 This document tracks non-obvious behaviors, environmental constraints, and common pitfalls encountered in this homelab.
 
 ---
-
 ## 📁 Secret Management: One File Per Secret
 - **Decision:** As of 2026-04-11, the project has transitioned from a single `ssh_backups.yaml` to individual files in the `secrets/` directory (e.g., `secrets/host_purpose.yaml`).
 - **Reasoning:** Prevents SOPS metadata conflicts, allows for surgical decryption, and provides cleaner Git diffs for security auditing.
 - **Workflow:** When adding a new secret, always create a fresh YAML file with a single `private_key` or `value` field and encrypt it individually. See `docs/ssh-management.md` for the full procedure.
 
+## 🧱 NixOS: Committing hardware-configuration.nix
+- **Decision:** Always commit the auto-generated `hardware-configuration.nix` for each host.
+- **Reasoning:** It acts as a "hardware lockfile," capturing specific UUIDs and kernel modules required for a 1:1 reproducible rebuild. It is essential for disaster recovery (software-level) without needing a fresh hardware scan.
+- **Hardware Change:** If the underlying hardware is replaced, a new scan must be performed, and the file in Git must be updated to reflect the new "Hardware DNA."
+
 ## 🌊 Flux API Versions
+...
 - **Issue:** Using `v1beta2` for `HelmRepository` or `v2beta1` for `HelmRelease` may result in a "no matches for kind" error.
 - **Root Cause:** The Flux installation on the current cluster (likely an older or specific version) expects `source.toolkit.fluxcd.io/v1` and `helm.toolkit.fluxcd.io/v2`.
 - **Solution:** Always verify the active API versions using `kubectl get helmrelease -A -o yaml | head -n 5` before creating new manifests.

@@ -53,14 +53,15 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 **Goal:** Provision the primary NixOS node and K3s control plane.
 
 1.  **Base NixOS Config:**
-    - [ ] Create `nixos/hosts/control-plane-01/configuration.nix`.
+    - [x] Create `nixos/hosts/control-plane-01/configuration.nix`.
+    - [x] Capture and commit hardware-configuration.nix.
     - [ ] Enable K3s in `server` mode.
 2.  **Hardware Optimization:**
     - [x] Configure power management and SSH access.
     - [x] Configure GitHub Authentication (Deploy Key) for OS-layer updates.
 3.  **Validation:**
-    - [ ] Boot Mini PC from NixOS installer, apply configuration.
-    - [ ] Verify `kubectl get nodes` on the Mini PC shows itself as `Ready`.
+    - [x] Boot control-plane-01 from NixOS installer, apply configuration.
+    - [ ] Verify `kubectl get nodes` on the control-plane-01 shows itself as `Ready`.
     - [ ] Verify Prometheus starts scraping metrics from the new node.
 
 ## Iteration 5: WireGuard & Remote Access
