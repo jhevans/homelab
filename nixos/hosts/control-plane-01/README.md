@@ -39,7 +39,7 @@ This is the manual for turning this code into a live server. **Read this if the 
     ```
 
 ### **Phase 2: K8s Takeover**
-1.  Once the machine is up, SSH into `john@192.168.1.10`.
+1.  Once the machine is up, SSH into `john@192.168.68.10`.
 2.  Verify K3s is running: `kubectl get nodes`.
 3.  **Bootstrap Flux:**
     ```bash
