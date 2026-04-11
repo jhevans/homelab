@@ -22,34 +22,34 @@ spec:
         - Networking:
             - AdGuard Home:
                 icon: adguard-home.png
-                href: http://adguard.lab.local:8080
+                href: http://adguard.lab.local
                 description: DNS Sinkhole & AdBlocker
         - Monitoring:
             - Headlamp:
                 icon: headlamp.png
-                href: http://headlamp.lab.local:8080
+                href: http://headlamp.lab.local
                 description: Kubernetes Dashboard
             - Grafana:
                 icon: grafana.png
-                href: http://grafana.lab.local:8080
+                href: http://grafana.lab.local
                 description: Metrics & Dashboards
             - Uptime Kuma:
                 icon: uptime-kuma.png
-                href: http://status.lab.local:8080
+                href: http://status.lab.local
                 description: Service Status Page
         - AI:
             - Open WebUI:
                 icon: open-webui.png
-                href: http://ai.lab.local:8080
+                href: http://ai.lab.local
                 description: Local LLM Interface
             - Ollama (CPU):
                 icon: ollama.png
-                href: http://ollama.lab.local:8080
+                href: http://ollama.lab.local
                 description: AI Backend (CPU)
         - Development:
             - Forgejo:
                 icon: forgejo.png
-                href: http://forgejo.lab.local:8080
+                href: http://forgejo.lab.local
                 description: Internal Git Forge
       bookmarks:
         - Developer:

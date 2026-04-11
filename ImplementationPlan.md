@@ -31,9 +31,9 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Leverage the built-in Traefik Ingress controller in K3s/K3d.
     - [ ] Create `Ingress` resources to expose AdGuard Home (`adguard.lab.local`) and Headlamp (`headlamp.lab.local`).
 3.  **Validation:**
-    - [ ] Access the AdGuard Home UI via `http://adguard.lab.local:8080`.
-    - [ ] Access the Headlamp UI via `http://headlamp.lab.local:8080`.
-    - [ ] Verify `curl -H "Host: headlamp.lab.local" localhost:8080` routes correctly.
+    - [ ] Access the AdGuard Home UI via `http://adguard.lab.local`.
+    - [ ] Access the Headlamp UI via `http://headlamp.lab.local`.
+    - [ ] Verify `curl -H "Host: headlamp.lab.local" localhost` routes correctly.
 
 ## Iteration 3: Observability (ASAP)
 **Goal:** Monitor cluster health and performance from the start.

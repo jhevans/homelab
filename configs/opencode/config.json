@@ -6,7 +6,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama",
       "options": {
-        "baseURL": "http://ollama.lab.local:8080/v1"
+        "baseURL": "http://ollama.lab.local/v1"
       },
       "models": {
         "llama3.2:1b": {
