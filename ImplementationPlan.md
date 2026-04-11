@@ -131,6 +131,7 @@ The potential, phased implementation of the agentic workforce is detailed in the
 
 ### Technical Debt & Maintenance
 - **Security:**
+  - [ ] **NEW: Create Ultra-Paranoid Security Agent.** A dedicated agent to perform continuous, "zero-trust" analysis of the cluster, secrets, and NixOS configurations.
   - [ ] Rotate Grafana admin password from default (`prom-operator`) to a SOPS-encrypted secret.
   - [ ] **Backlog:** Dedicated security posture review and hardening.
 - **Maintenance:**

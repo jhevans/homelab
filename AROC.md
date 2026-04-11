@@ -30,6 +30,7 @@ This document serves as the high-level vision for the agentic layer of the home 
 | **Scout Agent** | Searches the web for tools/techniques tailored to your specific lab interests. | Entries in Vector DB |
 | **Knowledge Agent** | Manages your Obsidian Vault; linking notes, fixing formatting, and adding context. | Enhanced Obsidian Vault |
 | **Red Team Driller** | Safe, automated chaos engineering and vulnerability exploitation in sandboxes. | Security Hardening PRs |
+| **Security Paranoid** | Performs continuous, zero-trust analysis of the cluster, secrets, and configurations. | Vulnerability Reports & Hardening PRs |
 | **Hardware Whisperer** | Synthesizes noisy system logs (Proxmox/Fans/UPS) into "Daily Standups." | Human-readable Logs |
 
 ---
