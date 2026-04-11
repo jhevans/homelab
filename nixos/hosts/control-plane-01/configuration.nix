@@ -14,17 +14,32 @@
   networking.hostName = "control-plane-01";
   networking.networkmanager.enable = true;
   
-  # Static IP Configuration (matching IPAM.md)
-  networking.interfaces.eth0.ipv4.addresses = [ {
-    address = "192.168.1.10";
-    prefixLength = 24;
-  } ];
-  networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = [ "1.1.1.1" ]; # Temporary until AdGuard is up
+  # Note: We are letting NetworkManager handle the interface name automatically.
+  # We will lock in the Static IP 192.168.1.10 via the router or 
+  # a more specific config once we verify the interface name (e.g. enp3s0).
+  # For the first boot, we use DHCP to ensure we don't get locked out.
 
-  # 3. Time Zone & Locale
-  time.timeZone = "Europe/London"; # Adjust if needed
+  # 3. Time Zone & Locale (Matches your Installer)
+  time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_GB.UTF-8";
+    LC_IDENTIFICATION = "en_GB.UTF-8";
+    LC_MEASUREMENT = "en_GB.UTF-8";
+    LC_MONETARY = "en_GB.UTF-8";
+    LC_NAME = "en_GB.UTF-8";
+    LC_NUMERIC = "en_GB.UTF-8";
+    LC_PAPER = "en_GB.UTF-8";
+    LC_TELEPHONE = "en_GB.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
+  };
+
+  # Console & X11 Keymaps (UK)
+  services.xserver.xkb = {
+    layout = "gb";
+    variant = "";
+  };
+  console.keyMap = "uk";
 
   # 4. User Configuration
   users.users.john = {
@@ -37,6 +52,7 @@
   };
 
   # 5. System Packages
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     vim
     git
@@ -56,19 +72,17 @@
   services.k3s = {
     enable = true;
     role = "server";
-    tokenFile = "/var/lib/rancher/k3s/server/node-token"; # Or a SOPS-encrypted file later
-    extraFlags = "--write-kubeconfig-mode 644 --disable traefik --disable local-storage"; # We use our own Traefik
+    # Commenting out tokenFile for initial bootstrap - K3s will generate its own.
+    # tokenFile = "/var/lib/rancher/k3s/server/node-token"; 
+    extraFlags = "--write-kubeconfig-mode 644 --disable traefik --disable local-storage";
   };
 
   # 7. Firewall (K3s requirements)
-  networking.firewall.allowedTCPPorts = [ 6443 2379 2380 ];
+  networking.firewall.allowedTCPPorts = [ 6443 2379 2380 80 443 ];
   networking.firewall.allowedUDPPorts = [ 8472 ]; # Flannel VXLAN
 
   # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment? DO NOT CHANGE THIS.
+  # settings for stateful data were taken. 
+  # Matches your 2026 Installer.
+  system.stateVersion = "25.11"; 
 }
