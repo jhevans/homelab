@@ -49,6 +49,14 @@ This is the manual for turning this code into a live server. **Read this if the 
       --branch=main \
       --path=./kubernetes/flux
     ```
+4.  **Inject SOPS Key (Age):**
+    Flux needs your private Age key to decrypt repository secrets. Run this from your **workstation**:
+    ```bash
+    export AGE_KEY_FILE=~/.age/homelab.age
+    cat "$AGE_KEY_FILE" | kubectl create secret generic sops-age \
+        --namespace=flux-system \
+        --from-file=age.agekey=/dev/stdin
+    ```
 
 ---
 **Status:** Initial `configuration.nix` created. **Action Required:** Replace SSH key placeholder before installation.
