@@ -7,6 +7,3 @@ resources:
   - release.yaml
   - uptime-kuma
   - loki
-  - monitors.yaml
-  - traefik-monitor.yaml
-  - flux-monitoring.yaml

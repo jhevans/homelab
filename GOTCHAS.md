@@ -36,7 +36,12 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 ## 🔄 Local K3d Context
 - **Issue:** The local `kubeconfig` for `k3d` may resolve to `host.docker.internal` which might be unreachable from the host environment.
 - **Solution:** Manually update the server address to `127.0.0.1` in the `kubeconfig` if connection issues occur.
+## 🥚 Flux: Prometheus CRD Bootstrap Failure
+- **Issue:** Flux reconciliation fails with `no matches for kind "PodMonitor"` or `"ServiceMonitor"` during initial bootstrap.
+- **Root Cause:** Flux dry-runs an entire Kustomization before applying it. If that Kustomization contains both the Prometheus Operator (which creates the CRDs) and resources *using* those CRDs (like PodMonitors), the dry-run will fail because the CRDs don't exist yet.
+- **Solution:** Move all monitor resources into a separate directory (e.g., `kubernetes/infrastructure/monitors/`) and create a separate Flux Kustomization that **`dependsOn`** the main infrastructure kustomization. This ensures the CRDs are fully installed before the monitors are dry-run and applied.
 
 ## 📡 Networking: TP-Link Deco /22 Subnet
+...
 - **Behavior:** TP-Link Deco mesh systems often use a large `/22` subnet (e.g., `192.168.68.0/22`).
 - **Gotcha:** This covers the range `192.168.68.0` through `192.168.71.255`. If using static IPs, ensure the gateway is correctly set (usually `192.168.68.1`) and the prefix length is `22` in NixOS networking.
