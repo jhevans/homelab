@@ -5,11 +5,17 @@ This is the manual for turning this code into a live server. **Read this if the 
 ### **Prerequisites:**
 1.  **Hardware:** HP EliteDesk Mini PC connected to the network.
 2.  **USB:** A bootable NixOS 23.11+ Installer USB.
-3.  **SSH Key:** Your public key is already in `configuration.nix`. To set up your private key on your laptop/workstation, run:
+3.  **SSH Keys:** Your public key is already in `configuration.nix`. To set up your keys, run:
     ```bash
-    sops -d secrets/ssh_backups.yaml | sed -n '/-----BEGIN/,/-----END/p' | sed 's/^    //' > ~/.ssh/id_homelab_mini_pc
+    # Extract Main SSH Key
+    sops -d secrets/control_plane_01_ssh.yaml | sed -n '/-----BEGIN/,/-----END/p' | sed 's/^    //' > ~/.ssh/id_homelab_mini_pc
     chmod 600 ~/.ssh/id_homelab_mini_pc
+
+    # Extract GitHub Deploy Key
+    sops -d secrets/control_plane_01_github_deploy.yaml | sed -n '/-----BEGIN/,/-----END/p' | sed 's/^    //' > ~/.ssh/id_github_deploy_control_plane_01
+    chmod 600 ~/.ssh/id_github_deploy_control_plane_01
     ```
+    **Note:** Ensure the GitHub Deploy Key is added to your repository's "Deploy Keys" in GitHub settings with read-only access.
 
 ### **Phase 1: Initial Install**
 1.  Boot from the NixOS USB.

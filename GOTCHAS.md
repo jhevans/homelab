@@ -4,6 +4,11 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 
 ---
 
+## 📁 Secret Management: One File Per Secret
+- **Decision:** As of 2026-04-11, the project has transitioned from a single `ssh_backups.yaml` to individual files in the `secrets/` directory (e.g., `secrets/host_purpose.yaml`).
+- **Reasoning:** Prevents SOPS metadata conflicts, allows for surgical decryption, and provides cleaner Git diffs for security auditing.
+- **Workflow:** When adding a new secret, always create a fresh YAML file with a single `private_key` or `value` field and encrypt it individually. See `docs/ssh-management.md` for the full procedure.
+
 ## 🌊 Flux API Versions
 - **Issue:** Using `v1beta2` for `HelmRepository` or `v2beta1` for `HelmRelease` may result in a "no matches for kind" error.
 - **Root Cause:** The Flux installation on the current cluster (likely an older or specific version) expects `source.toolkit.fluxcd.io/v1` and `helm.toolkit.fluxcd.io/v2`.
