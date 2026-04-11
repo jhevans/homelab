@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1h
-  path: ./kubernetes/infrastructure/monitors
+  path: ./kubernetes/monitors
   prune: true
   sourceRef:
     kind: GitRepository
