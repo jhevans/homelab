@@ -14,10 +14,13 @@
   networking.hostName = "control-plane-01";
   networking.networkmanager.enable = true;
   
-  # Note: We are letting NetworkManager handle the interface name automatically.
-  # We will lock in the Static IP 192.168.1.10 via the router or 
-  # a more specific config once we verify the interface name (e.g. enp3s0).
-  # For the first boot, we use DHCP to ensure we don't get locked out.
+  # Static IP Configuration (matching IPAM.md)
+  networking.interfaces.eno1.ipv4.addresses = [ {
+    address = "192.168.1.10";
+    prefixLength = 24;
+  } ];
+  networking.defaultGateway = "192.168.1.1";
+  networking.nameservers = [ "1.1.1.1" ]; # Temporary until AdGuard is up
 
   # 3. Time Zone & Locale (Matches your Installer)
   time.timeZone = "Europe/London";
