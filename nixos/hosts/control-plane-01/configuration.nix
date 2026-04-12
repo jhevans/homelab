@@ -77,7 +77,7 @@
     role = "server";
     # Commenting out tokenFile for initial bootstrap - K3s will generate its own.
     # tokenFile = "/var/lib/rancher/k3s/server/node-token"; 
-    extraFlags = "--write-kubeconfig-mode 644 --disable traefik --disable local-storage";
+    extraFlags = "--write-kubeconfig-mode 644 --disable traefik";
   };
 
   # 7. Firewall (K3s requirements)
