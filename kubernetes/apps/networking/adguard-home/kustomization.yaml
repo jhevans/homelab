@@ -4,8 +4,3 @@ resources:
   - repository.yaml
   - release.yaml
   - ingress.yaml
-
-configMapGenerator:
-  - name: adguard-home-config
-    files:
-      - AdGuardHome.yaml

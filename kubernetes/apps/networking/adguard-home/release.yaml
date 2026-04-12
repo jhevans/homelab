@@ -20,64 +20,15 @@ spec:
     remediation:
       retries: 3
   values:
-    # AdGuard Home specific values
-    # The gabe565 chart uses the bjw-s app-template structure
-    controllers:
-      main:
-        strategy: RollingUpdate
-        containers:
-          main:
-            image:
-              repository: adguard/adguardhome
-              tag: v0.107.73
     service:
       main:
-        controller: main
         ports:
           http:
             port: 80
     persistence:
       config:
         enabled: true
-        type: configMap
-        name: adguard-home-config
-        mountPath: /opt/adguardhome/conf/AdGuardHome.yaml
-        subPath: AdGuardHome.yaml
+        type: emptyDir
       data:
         enabled: true
         type: emptyDir
-    # Explicitly override probes to use port 80
-    probes:
-      liveness:
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      readiness:
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      startup:
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 0
-          periodSeconds: 5
-          timeoutSeconds: 1
-          failureThreshold: 30
