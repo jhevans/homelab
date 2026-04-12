@@ -39,7 +39,10 @@ spec:
     persistence:
       config:
         enabled: true
-        type: emptyDir
+        type: configMap
+        name: adguard-home-config
+        mountPath: /opt/adguardhome/conf/AdGuardHome.yaml
+        subPath: AdGuardHome.yaml
       data:
         enabled: true
         type: emptyDir

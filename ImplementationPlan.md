@@ -28,12 +28,13 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [x] Configure basic DNS and Web UI settings.
     - [x] Verify pod health and reachability.
 2.  **Configure Ingress (Traefik):**
-    - [ ] Leverage the built-in Traefik Ingress controller in K3s/K3d.
+    - [x] Leverage the custom Traefik HelmRelease in `/kubernetes/infrastructure/traefik`.
+    - [ ] **Loose End:** Update `scripts/bootstrap-sandbox.sh` to disable built-in Traefik (`--k3s-arg "--disable=traefik@server:0"`).
     - [ ] Create `Ingress` resources to expose AdGuard Home (`adguard.lab.local`) and Headlamp (`headlamp.lab.local`).
 3.  **Validation:**
     - [ ] Access the AdGuard Home UI via `http://adguard.lab.local`.
     - [ ] Access the Headlamp UI via `http://headlamp.lab.local`.
-    - [ ] Verify `curl -H "Host: headlamp.lab.local" localhost` routes correctly.
+    - [ ] **Loose End:** Automate local DNS resolution for `.lab.local` using AdGuard Home as the primary resolver for the host machine.
 
 ## Iteration 3: Observability (ASAP)
 **Goal:** Monitor cluster health and performance from the start.
@@ -87,6 +88,7 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Add a taint for GPU-only workloads.
 3.  **Ollama Deployment:**
     - [ ] Deploy Ollama with GPU resource requests.
+    - [ ] **NEW: Install Google Gemma.** Configure Ollama to pull and serve the Gemma model family.
 4.  **Validation:**
     - [ ] `kubectl describe node desktop` shows the GPU resource.
     - [ ] Run a test LLM query and verify GPU utilization.
