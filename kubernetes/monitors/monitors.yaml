@@ -48,3 +48,23 @@ spec:
   - port: http
     path: /metrics
     interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: forgejo
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: forgejo
+      app.kubernetes.io/name: forgejo
+  namespaceSelector:
+    matchNames:
+      - development
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 30s
