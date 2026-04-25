@@ -20,11 +20,36 @@ spec:
     remediation:
       retries: 3
   values:
+    controllers:
+      main:
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: adguard/adguardhome
+              tag: v0.107.56
     service:
       main:
+        controller: main
         ports:
           http:
             port: 80
+      dns-tcp:
+        controller: main
+        type: LoadBalancer
+        loadBalancerIP: 192.168.68.10
+        ports:
+          dns:
+            port: 53
+            protocol: TCP
+      dns-udp:
+        controller: main
+        type: LoadBalancer
+        loadBalancerIP: 192.168.68.10
+        ports:
+          dns:
+            port: 53
+            protocol: UDP
     persistence:
       config:
         enabled: true
