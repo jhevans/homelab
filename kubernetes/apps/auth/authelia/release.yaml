@@ -25,8 +25,6 @@ spec:
       env:
         - name: AUTHELIA_CONFIG_FILTERS
           value: "template"
-        - name: X_AUTHELIA_CONFIG
-          value: "/config/configuration.yaml"
         - name: AUTHELIA_SESSION_SECRET
           valueFrom:
             secretKeyRef:
