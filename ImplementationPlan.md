@@ -139,6 +139,7 @@ The potential, phased implementation of the agentic workforce is detailed in the
   - [ ] Rotate Grafana admin password from default (`prom-operator`) to a SOPS-encrypted secret.
   - [ ] **Backlog:** Dedicated security posture review and hardening.
 - **Maintenance:**
+  - [ ] **Backlog:** Troubleshoot and restore EmonHP (Heat Pump monitor) network connectivity.
   - [ ] **CRITICAL: Exhaustive Version Audit.** Review every Helm chart and container image in the repository. Perform a live web search for each to ensure we are on the latest stable version. **DO NOT RELY ON MEMORY.**
   - [ ] Configure automated backups for Postgres/Redis.
   - [ ] **Backlog:** Implement robust, reliable alerting for all mission-critical services.
