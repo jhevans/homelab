@@ -125,8 +125,10 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Successfully login to Forgejo using the SSO provider.
     - [ ] Verify that unauthenticated requests to protected services are redirected to the auth portal.
 
-## Future Backlog & Technical Debt
+### Future Backlog & Technical Debt
+- [ ] **NEW: Deploy Paperless-ngx.** Setup OCR-indexed document management as the "Private Memex" base.
 ### Autonomous Research & Operations Center (AROC) - [DRAFT/TBC]
+
 The potential, phased implementation of the agentic workforce is detailed in the **[AROC.md](./AROC.md) (TBC)** brainstorm document.
 
 * [ ] **Phase 1: The Intelligent Foundation** (Inference Proxy, Vector DB, Event Bus, Registry).
