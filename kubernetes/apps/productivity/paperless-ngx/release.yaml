@@ -43,6 +43,8 @@ spec:
         accessMode: ReadWriteOnce
       export:
         enabled: false
+        size: 1Gi
+        accessMode: ReadWriteOnce
     postgresql:
       enabled: true
       persistence:
