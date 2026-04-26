@@ -55,7 +55,7 @@ spec:
       enabled: true
       image:
         repository: bitnami/postgresql
-        tag: 16.6.0-debian-12-r7
+        tag: latest
       persistence:
         enabled: true
         size: 5Gi
@@ -65,6 +65,6 @@ spec:
       enabled: true
       image:
         repository: bitnami/redis
-        tag: 7.4.2-debian-12-r9
+        tag: latest
       auth:
         enabled: false
