@@ -66,5 +66,4 @@ spec:
       image:
         repository: bitnami/redis
         tag: latest
-      auth:
-        enabled: false
+      auth: {}
