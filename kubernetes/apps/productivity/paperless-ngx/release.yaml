@@ -54,3 +54,5 @@ spec:
         accessMode: ReadWriteOnce
     redis:
       enabled: true
+      auth:
+        enabled: false
