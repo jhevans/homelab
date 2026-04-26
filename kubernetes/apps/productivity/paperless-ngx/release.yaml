@@ -30,19 +30,23 @@ spec:
         enabled: true
         size: 5Gi
         storageClass: local-path
+        accessMode: ReadWriteOnce
       media:
         enabled: true
         size: 10Gi
         storageClass: local-path
+        accessMode: ReadWriteOnce
       consume:
         enabled: true
         size: 5Gi
         storageClass: local-path
+        accessMode: ReadWriteOnce
     postgresql:
       enabled: true
       persistence:
         enabled: true
         size: 5Gi
         storageClass: local-path
+        accessMode: ReadWriteOnce
     redis:
       enabled: true
