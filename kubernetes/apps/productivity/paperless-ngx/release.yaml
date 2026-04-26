@@ -41,6 +41,8 @@ spec:
         size: 5Gi
         storageClass: local-path
         accessMode: ReadWriteOnce
+      export:
+        enabled: false
     postgresql:
       enabled: true
       persistence:
