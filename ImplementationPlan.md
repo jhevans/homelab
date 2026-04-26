@@ -126,7 +126,7 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Verify that unauthenticated requests to protected services are redirected to the auth portal.
 
 ### Future Backlog & Technical Debt
-- [ ] **NEW: Deploy Paperless-ngx.** Setup OCR-indexed document management as the "Private Memex" base.
+- [x] **NEW: Deploy Paperless-ngx.** Setup OCR-indexed document management as the "Private Memex" base.
 ### Autonomous Research & Operations Center (AROC) - [DRAFT/TBC]
 
 The potential, phased implementation of the agentic workforce is detailed in the **[AROC.md](./AROC.md) (TBC)** brainstorm document.

@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: paperless-ngx
+  namespace: productivity
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: paperless-ngx
+      version: 0.24.1
+      sourceRef:
+        kind: HelmRepository
+        name: gabe565
+        namespace: productivity
+  values:
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: paperless.lab.local
+            paths:
+              - path: /
+                pathType: Prefix
+    env:
+      PAPERLESS_URL: http://paperless.lab.local
+      PAPERLESS_TIME_ZONE: UTC
+    persistence:
+      data:
+        enabled: true
+        size: 5Gi
+        storageClass: local-path
+      media:
+        enabled: true
+        size: 10Gi
+        storageClass: local-path
+      consume:
+        enabled: true
+        size: 5Gi
+        storageClass: local-path
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        size: 5Gi
+        storageClass: local-path
+    redis:
+      enabled: true

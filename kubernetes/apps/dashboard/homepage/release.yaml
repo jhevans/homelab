@@ -51,6 +51,11 @@ spec:
                 icon: forgejo.png
                 href: http://forgejo.lab.local
                 description: Internal Git Forge
+        - Productivity:
+            - Paperless-ngx:
+                icon: paperless-ngx.png
+                href: http://paperless.lab.local
+                description: Document Management System
       bookmarks:
         - Developer:
             - Github:
