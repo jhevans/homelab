@@ -13,6 +13,12 @@ spec:
         kind: HelmRepository
         name: gabe565
         namespace: productivity
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
     ingress:
       main:
@@ -47,9 +53,10 @@ spec:
         accessMode: ReadWriteOnce
     postgresql:
       enabled: true
-      image:
-        repository: bitnami/postgresql
-        tag: 16
+      primary:
+        image:
+          repository: bitnami/postgresql
+          tag: 16
       persistence:
         enabled: true
         size: 5Gi
@@ -57,8 +64,9 @@ spec:
         accessMode: ReadWriteOnce
     redis:
       enabled: true
-      image:
-        repository: bitnami/redis
-        tag: 7.4
+      master:
+        image:
+          repository: bitnami/redis
+          tag: 7.4
       auth:
         enabled: false
