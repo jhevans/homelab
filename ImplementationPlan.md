@@ -98,7 +98,10 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 
 1.  **Forgejo:**
     - [x] Deploy Forgejo as the internal Git forge.
-2.  **Home Assistant:**
+2.  **Paperless-ngx:**
+    - [ ] **DEBUG:** Resolve "secret not found" and Redis connectivity issues. Current workaround is bypassing the buggy Helm injection logic.
+    - [ ] **NEXT STEP:** Investigate implementing shared standalone Redis and Postgres instances (e.g., using CloudNativePG) to replace fragile per-app subcharts ("Fix Once, Fix Everywhere" approach).
+3.  **Home Assistant:**
     - [ ] Deploy with necessary hardware passthrough.
 3.  **Jellyfin:**
     - [ ] Deploy with GPU acceleration enabled.

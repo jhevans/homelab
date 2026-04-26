@@ -31,6 +31,7 @@ spec:
     env:
       PAPERLESS_URL: http://paperless.lab.local
       PAPERLESS_TIME_ZONE: UTC
+      PAPERLESS_REDIS: redis://paperless-ngx-redis-master:6379
     persistence:
       data:
         enabled: true

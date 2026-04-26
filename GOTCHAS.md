@@ -33,6 +33,12 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 - **Issue:** `configMapGenerator` without an explicit `namespace` in the `Kustomization` file may cause reconciliation failures if the parent kustomization doesn't propagate the namespace correctly.
 - **Solution:** Explicitly set `namespace: <name>` in the `kustomization.yaml` of the application directory.
 
+## 📦 Helm: gabe565/paperless-ngx Redis Secret Bug
+- **Issue:** Paperless-ngx pod fails with `secret "paperless-ngx-redis" not found` even if `redis.auth.enabled` is `false`.
+- **Root Cause:** The chart (v0.24.1) hardcodes a `secretKeyRef` for `A_REDIS_PASSWORD` whenever `redis.enabled` is `true`.
+- **Workaround:** Set `redis.enabled: false` to stop automatic injection and manually define `PAPERLESS_REDIS` in the `env` section.
+- **Architectural Recommendation:** Move toward **shared standalone instances** for Redis and Postgres (e.g., using CloudNativePG or a dedicated Redis cluster) rather than per-app subcharts. This "Fix Once, Fix Everywhere" approach simplifies management and prevents repeating these dependency issues.
+
 ## 🔄 Local K3d Context
 - **Issue:** The local `kubeconfig` for `k3d` may resolve to `host.docker.internal` which might be unreachable from the host environment.
 - **Solution:** Manually update the server address to `127.0.0.1` in the `kubeconfig` if connection issues occur.
