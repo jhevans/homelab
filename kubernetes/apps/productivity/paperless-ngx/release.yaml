@@ -47,6 +47,9 @@ spec:
         accessMode: ReadWriteOnce
     postgresql:
       enabled: true
+      image:
+        repository: bitnami/postgresql
+        tag: 16
       persistence:
         enabled: true
         size: 5Gi
@@ -54,5 +57,8 @@ spec:
         accessMode: ReadWriteOnce
     redis:
       enabled: true
+      image:
+        repository: bitnami/redis
+        tag: 7.4
       auth:
         enabled: false
