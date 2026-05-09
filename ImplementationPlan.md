@@ -144,6 +144,9 @@ The potential, phased implementation of the agentic workforce is detailed in the
   - [ ] Rotate Grafana admin password from default (`prom-operator`) to a SOPS-encrypted secret.
   - [ ] **Backlog:** Dedicated security posture review and hardening.
 - **Maintenance:**
+  - [ ] **NEW: Establish Regular Update Monitoring Mechanism.** Implement a system (e.g., Renovate, Flux image automation, or a dedicated agent audit) to regularly check for and notify/apply updates for all Helm charts and Docker images.
+  - [ ] **NEW: Automate Paperless-ngx Backups & Recovery.** Ensure document media, database, and Redis state are backed up off-site. 
+  - [ ] **NEW: Declarative Admin Setup.** Move Paperless-ngx admin credentials into a SOPS-encrypted secret to ensure zero-touch recovery after cluster failure.
   - [ ] **Backlog:** Troubleshoot and restore EmonHP (Heat Pump monitor) network connectivity.
   - [ ] **CRITICAL: Exhaustive Version Audit.** Review every Helm chart and container image in the repository. Perform a live web search for each to ensure we are on the latest stable version. **DO NOT RELY ON MEMORY.**
   - [ ] Configure automated backups for Postgres/Redis.
