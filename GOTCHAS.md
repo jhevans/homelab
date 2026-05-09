@@ -51,3 +51,8 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 ...
 - **Behavior:** TP-Link Deco mesh systems often use a large `/22` subnet (e.g., `192.168.68.0/22`).
 - **Gotcha:** This covers the range `192.168.68.0` through `192.168.71.255`. If using static IPs, ensure the gateway is correctly set (usually `192.168.68.1`) and the prefix length is `22` in NixOS networking.
+
+## 📱 Mobile: Android Private DNS Override
+- **Issue:** Android devices fail to resolve local `.lab.local` hostnames even when connected to the local Wi-Fi.
+- **Root Cause:** Android 9+ uses "Private DNS" (DNS-over-TLS) which defaults to "Automatic" or a specific provider, bypassing local DHCP/Router DNS settings.
+- **Solution:** On the Android device, go to `Settings > Network & internet > Private DNS` and set it to **Off**. This forces the device to respect the DNS server provided by the local network (AdGuard Home).
