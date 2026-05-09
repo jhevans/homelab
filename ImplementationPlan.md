@@ -128,6 +128,19 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Successfully login to Forgejo using the SSO provider.
     - [ ] Verify that unauthenticated requests to protected services are redirected to the auth portal.
 
+## Iteration 9: Disaster Recovery & Data Durability
+**Goal:** Ensure all persistent data is backed up and recoverable from total cluster failure.
+
+1.  **Deploy Velero + Restic/Kopia:**
+    - [ ] Deploy Velero via Flux in `kubernetes/infrastructure/backup`.
+    - [ ] Configure Restic/Kopia for file-level backups of `local-path` Persistent Volumes.
+2.  **Backup Storage Location (BSL):**
+    - [ ] Configure a primary local BSL (e.g., MinIO or external drive).
+    - [ ] Configure a secondary encrypted off-site BSL (e.g., Cloudflare R2 or Backblaze B2).
+3.  **Validation:**
+    - [ ] Perform a "Simulated Disaster": Delete a namespace (e.g., `productivity`) and restore it using Velero + Flux.
+    - [ ] Verify data integrity of Paperless-ngx documents after restoration.
+
 ### Future Backlog & Technical Debt
 - [x] **NEW: Deploy Paperless-ngx.** Setup OCR-indexed document management as the "Private Memex" base.
 ### Autonomous Research & Operations Center (AROC) - [DRAFT/TBC]
@@ -145,11 +158,9 @@ The potential, phased implementation of the agentic workforce is detailed in the
   - [ ] **Backlog:** Dedicated security posture review and hardening.
 - **Maintenance:**
   - [ ] **NEW: Establish Regular Update Monitoring Mechanism.** Implement a system (e.g., Renovate, Flux image automation, or a dedicated agent audit) to regularly check for and notify/apply updates for all Helm charts and Docker images.
-  - [ ] **NEW: Automate Paperless-ngx Backups & Recovery.** Ensure document media, database, and Redis state are backed up off-site. 
   - [ ] **NEW: Declarative Admin Setup.** Move Paperless-ngx admin credentials into a SOPS-encrypted secret to ensure zero-touch recovery after cluster failure.
   - [ ] **Backlog:** Troubleshoot and restore EmonHP (Heat Pump monitor) network connectivity.
   - [ ] **CRITICAL: Exhaustive Version Audit.** Review every Helm chart and container image in the repository. Perform a live web search for each to ensure we are on the latest stable version. **DO NOT RELY ON MEMORY.**
-  - [ ] Configure automated backups for Postgres/Redis.
   - [ ] **Backlog:** Implement robust, reliable alerting for all mission-critical services.
   - [ ] **Backlog:** Design and implement energy-aware scheduling/workload shifting (e.g., maximize "free energy" usage).
 
