@@ -26,5 +26,10 @@ spec:
       enabled: true
     grafana:
       enabled: false # We already have Grafana from kube-prometheus-stack
+      sidecar:
+        datasources:
+          enabled: false
+          label: grafana_datasource
+          labelValue: "1"
     prometheus:
       enabled: false # We already have Prometheus
