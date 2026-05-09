@@ -32,6 +32,8 @@ spec:
       PAPERLESS_URL: http://paperless.lab.local
       PAPERLESS_TIME_ZONE: UTC
       PAPERLESS_REDIS: redis://paperless-redis:6379
+    image:
+      tag: 2.20.15
     persistence:
       data:
         enabled: true
