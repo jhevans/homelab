@@ -10,7 +10,7 @@ data:
       address: 'tcp://0.0.0.0:9091/'
 
     log:
-      level: 'info'
+      level: 'debug'
 
     authentication_backend:
       file:
