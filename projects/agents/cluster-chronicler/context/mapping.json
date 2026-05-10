@@ -1,0 +1,11 @@
+{
+    "authelia": "The SSO and Authentication gatekeeper for the lab.",
+    "paperless": "The Document Management system and Private Memex.",
+    "ollama": "The Local AI inference engine.",
+    "forgejo": "The Git and DevOps center.",
+    "traefik": "The Ingress controller and network router.",
+    "adguard": "The DNS and Ad-blocking system.",
+    "homepage": "The central dashboard and laboratory portal.",
+    "prometheus": "The metrics and cluster health monitoring system.",
+    "grafana": "The visualization and dashboarding engine."
+}

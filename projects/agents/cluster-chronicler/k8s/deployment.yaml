@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-chronicler
+  namespace: ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cluster-chronicler
+  template:
+    metadata:
+      labels:
+        app: cluster-chronicler
+    spec:
+      serviceAccountName: cluster-chronicler
+      containers:
+      - name: chronicler
+        # Note: You will need to build and push this image to a registry
+        # Or for K3s/K3d, you can sometimes use 'local' images.
+        image: cluster-chronicler:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "128Mi"
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
