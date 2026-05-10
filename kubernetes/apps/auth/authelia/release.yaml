@@ -8,15 +8,19 @@ spec:
   chart:
     spec:
       chart: authelia
-      version: 0.9.1
+      version: 0.11.5
       sourceRef:
         kind: HelmRepository
         name: authelia
         namespace: auth
   values:
     domain: lab.local
+    
     configMap:
-      disabled: true
+      disabled: false
+      existingConfigMap: authelia-config
+      key: configuration.yaml
+
     secret:
       disabled: true
       existingSecret: authelia-secrets
@@ -45,27 +49,22 @@ spec:
             secretKeyRef:
               name: authelia-secrets
               key: jwt_secret
-    
-    volumes:
-      - name: authelia-config
-        configMap:
-          name: authelia-config
-      - name: users-db
-        configMap:
-          name: authelia-users
-    volumeMounts:
-      - name: authelia-config
-        mountPath: /config/configuration.yaml
-        subPath: configuration.yaml
-        readOnly: true
-      - name: users-db
-        mountPath: /config/users.yml
-        subPath: users.yml
-        readOnly: true
+      
+      extraVolumes:
+        - name: users-db
+          configMap:
+            name: authelia-users
+      extraVolumeMounts:
+        - name: users-db
+          mountPath: /config/users.yml
+          subPath: users.yml
+          readOnly: true
 
     persistence:
       enabled: true
       size: 1Gi
       storageClass: local-path
+      mountPath: /config/db
+    
     ingress:
       enabled: false

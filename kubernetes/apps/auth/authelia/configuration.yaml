@@ -18,7 +18,7 @@ session:
 
 storage:
   local:
-    path: /config/db.sqlite3
+    path: /config/db/db.sqlite3
   encryption_key: "placeholder-key" # Overridden by env var
 
 notifier:
