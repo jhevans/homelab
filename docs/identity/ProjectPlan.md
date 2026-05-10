@@ -26,8 +26,8 @@ The objective is to move away from fragmented, manually managed "server" setups 
 ## 3. Roadmap & Resources
 The execution of this blueprint is divided into specialized documents:
 
-*   **[ImplementationPlan.md](./ImplementationPlan.md):** The phased, iterative roadmap for building the lab.
-*   **[Software.md](./Software.md):** The definitive list of the software stack and technology choices.
+*   **[ImplementationPlan.md](../workflow/ImplementationPlan.md):** The phased, iterative roadmap for building the lab.
+*   **[Software.md](../registry/Software.md):** The definitive list of the software stack and technology choices.
 *   **[AROC.md](./AROC.md) (TBC):** The machine-generated blueprint for the Autonomous Research & Operations Center.
 
 ---

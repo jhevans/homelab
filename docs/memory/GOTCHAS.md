@@ -1,6 +1,6 @@
 # ⚠️ Project Gotchas & Troubleshooting
 
-This document tracks non-obvious behaviors, environmental constraints, and common pitfalls encountered in this homelab.
+This document tracks non-obvious behaviors, environmental constraints, and common pitfalls encountered in this homelab. For general documentation standards and file purposes, see the **Doc Housekeeper** skill references.
 
 ---
 ## 📁 Secret Management: One File Per Secret

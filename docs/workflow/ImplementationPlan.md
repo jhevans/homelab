@@ -1,6 +1,6 @@
 # Implementation Plan: 2026 Home Lab & Private Cloud
 
-This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifiable iterations. Each iteration follows the **Plan -> Act -> Validate** cycle.
+This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into small, verifiable iterations. Each iteration follows the **Plan -> Act -> Validate** cycle.
 
 ## Iteration 1: Repository Structure & Sandbox Bootstrap
 **Goal:** Establish the GitOps repository and a local K3d cluster for testing.
@@ -26,12 +26,14 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 1.  **Deploy AdGuard Home/Pi-hole:**
     - [x] Create a `HelmRelease` for AdGuard Home in `/kubernetes/apps/networking`.
     - [x] Configure basic DNS and Web UI settings.
-    - [x] Verify pod health and reachability.
+    - [ ] **Awaiting Verification:** Verify pod health and reachability.
 2.  **Configure Ingress (Traefik):**
     - [x] Leverage the custom Traefik HelmRelease in `/kubernetes/infrastructure/traefik`.
-    - [ ] **Loose End:** Update `scripts/bootstrap-sandbox.sh` to disable built-in Traefik (`--k3s-arg "--disable=traefik@server:0"`).
-    - [ ] Create `Ingress` resources to expose AdGuard Home (`adguard.lab.local`) and Headlamp (`headlamp.lab.local`).
-3.  **Validation:**
+    - [x] **Loose End:** Update `scripts/bootstrap-sandbox.sh` to disable built-in Traefik (`--k3s-arg "--disable=traefik@server:0"`).
+    - [ ] **Awaiting Verification:** Create `Ingress` resources to expose AdGuard Home (`adguard.lab.local`) and Headlamp (`headlamp.lab.local`). (Manifests exist in `kubernetes/apps/networking/adguard-home` and `kubernetes/apps/monitoring/headlamp`).
+3.  **Deploy Dashboard (Homepage):**
+    - [ ] **Awaiting Verification:** Deploy Homepage dashboard. (Manifest exists in `kubernetes/apps/dashboard/homepage`).
+4.  **Validation:**
     - [ ] Access the AdGuard Home UI via `http://adguard.lab.local`.
     - [ ] Access the Headlamp UI via `http://headlamp.lab.local`.
     - [ ] **Loose End:** Automate local DNS resolution for `.lab.local` using AdGuard Home as the primary resolver for the host machine.
@@ -42,13 +44,13 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 1.  **Prometheus & Grafana:**
     - [x] Deploy the `kube-prometheus-stack` via Helm in `/kubernetes/infrastructure`.
 2.  **Uptime Kuma:**
-    - [x] Deploy Uptime Kuma to monitor service availability.
+    - [ ] **Awaiting Verification:** Deploy Uptime Kuma to monitor service availability. (Manifest exists in `kubernetes/infrastructure/monitoring/uptime-kuma`).
 3.  **Loki & Promtail (Logging):**
-    - [x] Deploy the `loki-stack` to collect and store logs from all pods.
+    - [ ] **Awaiting Verification:** Deploy the `loki-stack` to collect and store logs from all pods. (Manifest exists in `kubernetes/infrastructure/monitoring/loki`).
 4.  **Validation:**
     - [ ] Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
     - [ ] Query pod logs in the Grafana "Explore" view using the Loki data source.
-    - [x] Configure a test alert in Uptime Kuma.
+    - [ ] **Awaiting Verification:** Configure a test alert in Uptime Kuma.
 
 ## Iteration 4: The NixOS Core (Mini PC)
 **Goal:** Provision the primary NixOS node and K3s control plane.
@@ -87,7 +89,8 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
     - [ ] Label the desktop node: `nvidia.com/gpu=true`.
     - [ ] Add a taint for GPU-only workloads.
 3.  **Ollama Deployment:**
-    - [ ] Deploy Ollama with GPU resource requests.
+    - [ ] **Awaiting Verification:** Deploy Ollama with GPU resource requests. (Manifest exists in `kubernetes/apps/ai/ollama-cpu`).
+    - [ ] **Awaiting Verification:** Deploy Open WebUI. (Manifest exists in `kubernetes/apps/ai/open-webui`).
     - [ ] **NEW: Install Google Gemma.** Configure Ollama to pull and serve the Gemma model family.
 4.  **Validation:**
     - [ ] `kubectl describe node desktop` shows the GPU resource.
@@ -97,8 +100,9 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 **Goal:** Deploy daily-use applications.
 
 1.  **Forgejo:**
-    - [x] Deploy Forgejo as the internal Git forge.
+    - [ ] **Awaiting Verification:** Deploy Forgejo as the internal Git forge. (Manifest exists in `kubernetes/apps/development/forgejo`).
 2.  **Paperless-ngx:**
+    - [ ] **Awaiting Verification:** Deploy Paperless-ngx. (Manifest exists in `kubernetes/apps/productivity/paperless-ngx`).
     - [ ] **DEBUG:** Resolve "secret not found" and Redis connectivity issues. Current workaround is bypassing the buggy Helm injection logic.
     - [ ] **NEXT STEP:** Investigate implementing shared standalone Redis and Postgres instances (e.g., using CloudNativePG) to replace fragile per-app subcharts ("Fix Once, Fix Everywhere" approach).
 3.  **Home Assistant:**
@@ -115,7 +119,7 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 **Goal:** Centralize user management and enable SSO across all lab services.
 
 1.  **Deploy Authentik or Authelia:**
-    - [ ] Research and select between Authentik (all-in-one, feature-rich) or Authelia (lightweight, simple).
+    - [ ] **Awaiting Verification:** Research and select between Authentik (all-in-one, feature-rich) or Authelia (lightweight, simple). (Manifest exists in `kubernetes/apps/auth/authelia`).
     - [ ] Deploy via Helm in `/kubernetes/apps/networking`.
     - [ ] Configure a persistent database (Postgres) and Redis cache.
 2.  **Identity Provider Integration:**
@@ -145,7 +149,7 @@ This plan breaks down the [ProjectPlan.md](./ProjectPlan.md) into small, verifia
 - [x] **NEW: Deploy Paperless-ngx.** Setup OCR-indexed document management as the "Private Memex" base.
 ### Autonomous Research & Operations Center (AROC) - [DRAFT/TBC]
 
-The potential, phased implementation of the agentic workforce is detailed in the **[AROC.md](./AROC.md) (TBC)** brainstorm document.
+The potential, phased implementation of the agentic workforce is detailed in the **[AROC.md](../identity/AROC.md) (TBC)** brainstorm document.
 
 * [ ] **Phase 1: The Intelligent Foundation** (Inference Proxy, Vector DB, Event Bus, Registry).
 * [ ] **Phase 2: The Agentic Workforce** (Dev, Auditor, Scout, Knowledge, Red Team Agents).
