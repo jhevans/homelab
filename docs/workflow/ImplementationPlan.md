@@ -116,22 +116,24 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
     - [ ] Login to Home Assistant and discover local devices.
     - [ ] Stream a video from Jellyfin and verify hardware transcoding.
 
-## Iteration 8: Unified Authentication (SSO)
+## Iteration 8: Unified Authentication (SSO) & Integration
 **Goal:** Centralize user management and enable SSO across all lab services.
 
-1.  **Deploy Authentik or Authelia:**
-    - [ ] **BROKEN:** Authelia manifest exists but pod is in `CrashLoopBackOff`. (Error: Failed to load configuration from `/configuration.yaml`).
-    - [ ] Deploy via Helm in `/kubernetes/apps/networking`.
-    - [ ] Configure a persistent database (Postgres) and Redis cache.
-2.  **Identity Provider Integration:**
-    - [ ] Configure LDAP or OIDC providers.
-    - [ ] Integrate with Forgejo, Grafana, and AdGuard Home.
-3.  **Security Hardening:**
+1.  **Deploy Authelia:**
+    - [x] **Verified:** Authelia v0.11.5 is Running and accessible at `http://auth.lab.local`.
+    - [x] **Verified:** Users can authenticate via the portal using credentials in `configmaps.yaml`.
+2.  **Traefik Integration (ForwardAuth):**
+    - [ ] **NEXT:** Configure Traefik `ForwardAuth` Middleware to point to the Authelia verify API.
+    - [ ] **NEXT:** Update Ingress resources to use the `authelia` middleware.
+3.  **Application Integration (Paperless-ngx):**
+    - [ ] **NEXT:** Enable "Remote User" authentication in Paperless-ngx.
+    - [ ] **NEXT:** Configure header passing (Remote-User, Remote-Groups) from Authelia to Paperless.
+4.  **Security Hardening:**
     - [ ] Enforce 2FA/MFA (WebAuthn/TOTP) for all services.
     - [ ] Implement Geoblocking or "Level 2" authentication for external access.
-4.  **Validation:**
-    - [ ] Successfully login to Forgejo using the SSO provider.
-    - [ ] Verify that unauthenticated requests to protected services are redirected to the auth portal.
+5.  **Validation:**
+    - [ ] Access `paperless.lab.local` and be redirected to Authelia.
+    - [ ] Log in via Authelia and be automatically logged into Paperless with the correct user profile.
 
 ## Iteration 9: Disaster Recovery & Data Durability
 **Goal:** Ensure all persistent data is backed up and recoverable from total cluster failure.
