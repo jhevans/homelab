@@ -10,7 +10,7 @@ data:
       address: 'tcp://0.0.0.0:9091/'
 
     log:
-      level: 'debug'
+      level: 'info'
 
     authentication_backend:
       file:
@@ -20,8 +20,9 @@ data:
       name: authelia_session
       secret: "placeholder-secret" # Overridden by env var
       cookies:
-        - domain: lab.local
-          authelia_url: https://auth.lab.local
+        - domain: 'lab.local'
+          authelia_url: 'http://auth.lab.local'
+          default_redirection_url: 'http://auth.lab.local'
 
     storage:
       local:
