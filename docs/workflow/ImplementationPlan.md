@@ -50,7 +50,7 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
     - [x] **Verified:** Loki is Running (verified via PVC and pod logs).
 4.  **Validation:**
     - [x] **Verified:** Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
-    - [ ] Query pod logs in the Grafana "Explore" view using the Loki data source.
+    - [x] **Verified:** Query pod logs in the Grafana "Explore" view using the Loki data source.
     - [ ] **Partial Verification:** Uptime Kuma is up, but test alerts require notification setup.
 
 ## Iteration 4: The NixOS Core (Mini PC)
