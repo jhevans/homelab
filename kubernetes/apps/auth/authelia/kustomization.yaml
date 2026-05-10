@@ -7,14 +7,4 @@ resources:
   - middleware.yaml
   - secrets.yaml
   - ingress.yaml
-
-generatorOptions:
-  disableNameHash: true
-
-configMapGenerator:
-  - name: authelia-users
-    files:
-      - users.yml
-  - name: authelia-config
-    files:
-      - configuration.yaml
+  - configmaps.yaml
