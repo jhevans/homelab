@@ -50,7 +50,7 @@ data:
       john:
         displayname: "John"
         # Password is 'authelia'
-        password: "$argon2id$v=19$m=65536,t=3,p=4$GqcdgEzg6VEstG63xLC8EQ$QfA7ttd/9l6WmIvZKm5Z8x+cqGBygHjz/I8brZpiDsg"
+        password: "$argon2id$v=19$m=65536,t=3,p=4$d3VzLg2+1r4jjLzV+temqQ$UGK/5hwA+iaXKKYZjdrqHgSxUPC8ZkDWfBWXCmsoSks"
         email: john@lab.local
         groups:
           - admins
