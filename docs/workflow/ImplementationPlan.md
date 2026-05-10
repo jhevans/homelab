@@ -26,16 +26,16 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 1.  **Deploy AdGuard Home/Pi-hole:**
     - [x] Create a `HelmRelease` for AdGuard Home in `/kubernetes/apps/networking`.
     - [x] Configure basic DNS and Web UI settings.
-    - [ ] **Awaiting Verification:** Verify pod health and reachability.
+    - [x] **Verified:** AdGuard Home is Running and responding with HTTP 200 via Ingress.
 2.  **Configure Ingress (Traefik):**
     - [x] Leverage the custom Traefik HelmRelease in `/kubernetes/infrastructure/traefik`.
     - [x] **Loose End:** Update `scripts/bootstrap-sandbox.sh` to disable built-in Traefik (`--k3s-arg "--disable=traefik@server:0"`).
-    - [ ] **Awaiting Verification:** Create `Ingress` resources to expose AdGuard Home (`adguard.lab.local`) and Headlamp (`headlamp.lab.local`). (Manifests exist in `kubernetes/apps/networking/adguard-home` and `kubernetes/apps/monitoring/headlamp`).
+    - [x] **Verified:** Ingress resources for AdGuard and Headlamp are functional (tested via Traefik 192.168.68.10 VIP).
 3.  **Deploy Dashboard (Homepage):**
-    - [ ] **Awaiting Verification:** Deploy Homepage dashboard. (Manifest exists in `kubernetes/apps/dashboard/homepage`).
+    - [x] **Verified:** Homepage dashboard is Running and responding with HTTP 200 at `lab.local`.
 4.  **Validation:**
-    - [ ] Access the AdGuard Home UI via `http://adguard.lab.local`.
-    - [ ] Access the Headlamp UI via `http://headlamp.lab.local`.
+    - [x] **Verified:** Access AdGuard Home UI via `http://adguard.lab.local`.
+    - [x] **Verified:** Access Headlamp UI via `http://headlamp.lab.local`.
     - [ ] **Loose End:** Automate local DNS resolution for `.lab.local` using AdGuard Home as the primary resolver for the host machine.
 
 ## Iteration 3: Observability (ASAP)
@@ -43,14 +43,15 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 
 1.  **Prometheus & Grafana:**
     - [x] Deploy the `kube-prometheus-stack` via Helm in `/kubernetes/infrastructure`.
+    - [x] **Verified:** Grafana is Running and accessible via Ingress.
 2.  **Uptime Kuma:**
-    - [ ] **Awaiting Verification:** Deploy Uptime Kuma to monitor service availability. (Manifest exists in `kubernetes/infrastructure/monitoring/uptime-kuma`).
+    - [x] **Verified:** Uptime Kuma is Running and accessible via Ingress.
 3.  **Loki & Promtail (Logging):**
-    - [ ] **Awaiting Verification:** Deploy the `loki-stack` to collect and store logs from all pods. (Manifest exists in `kubernetes/infrastructure/monitoring/loki`).
+    - [x] **Verified:** Loki is Running (verified via PVC and pod logs).
 4.  **Validation:**
-    - [ ] Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
+    - [x] **Verified:** Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
     - [ ] Query pod logs in the Grafana "Explore" view using the Loki data source.
-    - [ ] **Awaiting Verification:** Configure a test alert in Uptime Kuma.
+    - [ ] **Partial Verification:** Uptime Kuma is up, but test alerts require notification setup.
 
 ## Iteration 4: The NixOS Core (Mini PC)
 **Goal:** Provision the primary NixOS node and K3s control plane.
@@ -89,8 +90,8 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
     - [ ] Label the desktop node: `nvidia.com/gpu=true`.
     - [ ] Add a taint for GPU-only workloads.
 3.  **Ollama Deployment:**
-    - [ ] **Awaiting Verification:** Deploy Ollama with GPU resource requests. (Manifest exists in `kubernetes/apps/ai/ollama-cpu`).
-    - [ ] **Awaiting Verification:** Deploy Open WebUI. (Manifest exists in `kubernetes/apps/ai/open-webui`).
+    - [x] **Verified:** Ollama-cpu is Running (responding via Ingress). Note: Flux reports a Helm timeout during PVC provision, but service is functional.
+    - [x] **Verified:** Open WebUI is Running and accessible at `ai.lab.local`.
     - [ ] **NEW: Install Google Gemma.** Configure Ollama to pull and serve the Gemma model family.
 4.  **Validation:**
     - [ ] `kubectl describe node desktop` shows the GPU resource.
@@ -100,9 +101,9 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 **Goal:** Deploy daily-use applications.
 
 1.  **Forgejo:**
-    - [ ] **Awaiting Verification:** Deploy Forgejo as the internal Git forge. (Manifest exists in `kubernetes/apps/development/forgejo`).
+    - [x] **Verified:** Forgejo is Running and responding with HTTP 200 via Ingress.
 2.  **Paperless-ngx:**
-    - [ ] **Awaiting Verification:** Deploy Paperless-ngx. (Manifest exists in `kubernetes/apps/productivity/paperless-ngx`).
+    - [x] **Verified:** Paperless-ngx is Running and responding with HTTP 302 (Redirect to login) via Ingress.
     - [ ] **DEBUG:** Resolve "secret not found" and Redis connectivity issues. Current workaround is bypassing the buggy Helm injection logic.
     - [ ] **NEXT STEP:** Investigate implementing shared standalone Redis and Postgres instances (e.g., using CloudNativePG) to replace fragile per-app subcharts ("Fix Once, Fix Everywhere" approach).
 3.  **Home Assistant:**
@@ -119,7 +120,7 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 **Goal:** Centralize user management and enable SSO across all lab services.
 
 1.  **Deploy Authentik or Authelia:**
-    - [ ] **Awaiting Verification:** Research and select between Authentik (all-in-one, feature-rich) or Authelia (lightweight, simple). (Manifest exists in `kubernetes/apps/auth/authelia`).
+    - [ ] **BROKEN:** Authelia manifest exists but pod is in `CrashLoopBackOff`. (Error: Failed to load configuration from `/configuration.yaml`).
     - [ ] Deploy via Helm in `/kubernetes/apps/networking`.
     - [ ] Configure a persistent database (Postgres) and Redis cache.
 2.  **Identity Provider Integration:**
