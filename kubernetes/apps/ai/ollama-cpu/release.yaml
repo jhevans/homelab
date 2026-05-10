@@ -18,6 +18,13 @@ spec:
       models:
         - llama3.2:1b
         - smollm2:135m
+    resources:
+      limits:
+        cpu: "5"
+        memory: "6Gi"
+      requests:
+        cpu: "1"
+        memory: "2Gi"
     persistentVolume:
       enabled: true
       size: 10Gi
