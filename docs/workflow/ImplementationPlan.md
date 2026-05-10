@@ -2,20 +2,6 @@
 
 This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into small, verifiable iterations. Each iteration follows the **Plan -> Act -> Validate** cycle.
 
-## Iteration 3: Observability (ASAP)
-**Goal:** Monitor cluster health and performance from the start.
-
-1.  **Prometheus & Grafana:**
-    - [x] Deploy the `kube-prometheus-stack` via Helm in `/kubernetes/infrastructure`.
-    - [x] **Verified:** Grafana is Running and accessible via Ingress.
-2.  **Uptime Kuma:**
-    - [x] **Verified:** Uptime Kuma is Running and accessible via Ingress.
-3.  **Loki & Promtail (Logging):**
-    - [x] **Verified:** Loki is Running (verified via PVC and pod logs).
-4.  **Validation:**
-    - [x] **Verified:** Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
-    - [x] **Verified:** Query pod logs in the Grafana "Explore" view using the Loki data source.
-
 ## Iteration 5: WireGuard & Remote Access
 **Goal:** Securely access the cluster from outside the local network.
 
