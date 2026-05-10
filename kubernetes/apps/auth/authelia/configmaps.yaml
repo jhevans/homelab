@@ -22,8 +22,7 @@ data:
       cookies:
         - domain: 'lab.local'
           authelia_url: 'http://auth.lab.local'
-          default_redirection_url: 'http://lab.local'
-          insecure: true
+          default_redirection_url: 'http://auth.lab.local'
 
     storage:
       local:
