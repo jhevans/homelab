@@ -14,7 +14,6 @@ spec:
         name: authelia
         namespace: auth
   values:
-    domain: lab.local
     
     configMap:
       disabled: false
@@ -64,7 +63,6 @@ spec:
       enabled: true
       size: 1Gi
       storageClass: local-path
-      mountPath: /config/db
     
     ingress:
       enabled: false
