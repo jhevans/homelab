@@ -29,14 +29,14 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
     - [x] **Verified:** AdGuard Home is Running and responding with HTTP 200 via Ingress.
 2.  **Configure Ingress (Traefik):**
     - [x] Leverage the custom Traefik HelmRelease in `/kubernetes/infrastructure/traefik`.
-    - [x] **Loose End:** Update `scripts/bootstrap-sandbox.sh` to disable built-in Traefik (`--k3s-arg "--disable=traefik@server:0"`).
+    - [x] **Retired:** `scripts/bootstrap-sandbox.sh` (K3s Traefik disabling logic migrated to `manual-bootstrap-guide.md`).
     - [x] **Verified:** Ingress resources for AdGuard and Headlamp are functional (tested via Traefik 192.168.68.10 VIP).
 3.  **Deploy Dashboard (Homepage):**
     - [x] **Verified:** Homepage dashboard is Running and responding with HTTP 200 at `lab.local`.
 4.  **Validation:**
     - [x] **Verified:** Access AdGuard Home UI via `http://adguard.lab.local`.
     - [x] **Verified:** Access Headlamp UI via `http://headlamp.lab.local`.
-    - [ ] **Loose End:** Automate local DNS resolution for `.lab.local` using AdGuard Home as the primary resolver for the host machine.
+    - [x] **Verified:** Local DNS resolution for `.lab.local` using AdGuard Home as the primary resolver (Manual configuration documented).
 
 ## Iteration 3: Observability (ASAP)
 **Goal:** Monitor cluster health and performance from the start.

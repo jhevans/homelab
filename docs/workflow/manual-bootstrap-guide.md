@@ -45,3 +45,36 @@ This guide provides the minimal steps to provision a new NixOS node using the **
 ## Phase 4: Verification (Workstation)
 1.  **Verify Access:** `ssh john@<STATIC_IP>` (using your `id_control_plane_01` key).
 2.  **Bootstrap Flux:** (Follow host-specific `README.md` for `flux bootstrap`).
+
+---
+
+## Appendix: Local Sandbox (K3d) Setup
+Used for testing manifests or logic in a safe, local environment.
+
+1.  **Create Cluster:**
+    ```bash
+    k3d cluster create homelab-sandbox \
+        --image rancher/k3s:v1.34.1-k3s1 \
+        --port "8080:80@loadbalancer" \
+        --port "8443:443@loadbalancer" \
+        --k3s-arg "--disable=traefik@server:0"
+    ```
+
+2.  **Inject SOPS Key:**
+    ```bash
+    kubectl create namespace flux-system
+    cat ~/.age/homelab.age | kubectl create secret generic sops-age \
+        --namespace=flux-system \
+        --from-file=age.agekey=/dev/stdin
+    ```
+
+3.  **Bootstrap Flux:**
+    ```bash
+    export GITHUB_TOKEN=<YOUR_TOKEN>
+    flux bootstrap github \
+        --owner=<GITHUB_USER> \
+        --repository=homelab \
+        --branch=main \
+        --path=./kubernetes/flux \
+        --personal
+    ```
