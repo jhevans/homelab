@@ -2,7 +2,23 @@
 
 This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into small, verifiable iterations. Each iteration follows the **Plan -> Act -> Validate** cycle.
 
-## Iteration 1: Critical Data Protection (Paperless-ngx)
+## Iteration 1: AI "Learning-by-Doing" (The Cluster Chronicler)
+**Goal:** Build a "throwaway" agent to bridge gaps in Secure Containers and RAG.
+
+1. **Development (Workstation):**
+   - [ ] Write a minimal Python script using `kubernetes-client` to watch cluster events.
+   - [ ] Implement "Poor Man's RAG": Read a local JSON/Markdown file for app context.
+   - [ ] Test LLM integration: Send event + context to local Ollama API.
+2. **Deployment (Cluster):**
+   - [ ] Containerize: Create a non-root Dockerfile.
+   - [ ] RBAC: Define `ServiceAccount`, `Role`, and `RoleBinding` (Read-only Events/Pods).
+   - [ ] Deploy: A simple `Deployment` in the `ai` namespace.
+3. **Validation (Learning Outcomes):**
+   - [ ] **Secure Agency:** Verify the agent cannot delete or modify cluster resources (RBAC enforcement).
+   - [ ] **RAG Check:** Verify the narrative includes context from the docs (e.g., identifies "Authelia" as "SSO").
+   - [ ] **Narrative Quality:** View `kubectl logs` and see: *"Authelia (SSO) is now standing guard over the cluster."*
+
+## Iteration 2: Critical Data Protection (Paperless-ngx)
 **Goal:** Ensure the "Genuine Utility" data in Paperless is safe from total Mini PC failure.
 
 1.  **Deploy Velero + Restic/Kopia:**
