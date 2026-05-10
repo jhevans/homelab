@@ -16,10 +16,8 @@ spec:
       serviceAccountName: cluster-chronicler
       containers:
       - name: chronicler
-        # Note: You will need to build and push this image to a registry
-        # Or for K3s/K3d, you can sometimes use 'local' images.
-        image: cluster-chronicler:latest
-        imagePullPolicy: IfNotPresent
+        image: jhevans28/cluster-chronicler:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: "200m"
