@@ -2,42 +2,6 @@
 
 This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into small, verifiable iterations. Each iteration follows the **Plan -> Act -> Validate** cycle.
 
-## Iteration 1: Repository Structure & Sandbox Bootstrap
-**Goal:** Establish the GitOps repository and a local K3d cluster for testing.
-
-1.  **Repository Setup:**
-    - [x] Initialize directory structure: `/kubernetes/apps`, `/kubernetes/flux`, `/kubernetes/infrastructure`, `/nixos/hosts`, `/nixos/modules`.
-2.  **K3d Cluster Creation:**
-    - [x] Create a local cluster: `k3d cluster create homelab-sandbox --port "8080:80@loadbalancer" --port "8443:443@loadbalancer"`.
-3.  **Secret Management (SOPS + Age):**
-    - [x] Install `sops` and `age` CLI tools.
-    - [x] Generate an Age key pair for the cluster.
-    - [x] Create a Kubernetes secret in the cluster containing the Age private key for Flux to use.
-4.  **FluxCD Bootstrap:**
-    - [x] Install Flux CLI.
-    - [x] Bootstrap Flux into the `homelab-sandbox` cluster using the GitHub repository.
-5.  **Validation:**
-    - [x] `flux get sources git` shows successful reconciliation.
-    - [x] `kubectl get nodes` shows the K3d node(s).
-
-## Iteration 2: Internal DNS & Ingress
-**Goal:** Setup local DNS resolution and routing within the sandbox.
-
-1.  **Deploy AdGuard Home/Pi-hole:**
-    - [x] Create a `HelmRelease` for AdGuard Home in `/kubernetes/apps/networking`.
-    - [x] Configure basic DNS and Web UI settings.
-    - [x] **Verified:** AdGuard Home is Running and responding with HTTP 200 via Ingress.
-2.  **Configure Ingress (Traefik):**
-    - [x] Leverage the custom Traefik HelmRelease in `/kubernetes/infrastructure/traefik`.
-    - [x] **Retired:** `scripts/bootstrap-sandbox.sh` (K3s Traefik disabling logic migrated to `manual-bootstrap-guide.md`).
-    - [x] **Verified:** Ingress resources for AdGuard and Headlamp are functional (tested via Traefik 192.168.68.10 VIP).
-3.  **Deploy Dashboard (Homepage):**
-    - [x] **Verified:** Homepage dashboard is Running and responding with HTTP 200 at `lab.local`.
-4.  **Validation:**
-    - [x] **Verified:** Access AdGuard Home UI via `http://adguard.lab.local`.
-    - [x] **Verified:** Access Headlamp UI via `http://headlamp.lab.local`.
-    - [x] **Verified:** Local DNS resolution for `.lab.local` using AdGuard Home as the primary resolver (Manual configuration documented).
-
 ## Iteration 3: Observability (ASAP)
 **Goal:** Monitor cluster health and performance from the start.
 
@@ -51,22 +15,6 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 4.  **Validation:**
     - [x] **Verified:** Access Grafana dashboards and see CPU/RAM metrics for the K3d sandbox nodes.
     - [x] **Verified:** Query pod logs in the Grafana "Explore" view using the Loki data source.
-    - [ ] **Partial Verification:** Uptime Kuma is up, but test alerts require notification setup.
-
-## Iteration 4: The NixOS Core (Mini PC)
-**Goal:** Provision the primary NixOS node and K3s control plane.
-
-1.  **Base NixOS Config:**
-    - [x] Create `nixos/hosts/control-plane-01/configuration.nix`.
-    - [x] Capture and commit hardware-configuration.nix.
-    - [ ] Enable K3s in `server` mode.
-2.  **Hardware Optimization:**
-    - [x] Configure power management and SSH access.
-    - [x] Configure GitHub Authentication (Deploy Key) for OS-layer updates.
-3.  **Validation:**
-    - [x] Boot control-plane-01 from NixOS installer, apply configuration.
-    - [ ] Verify `kubectl get nodes` on the control-plane-01 shows itself as `Ready`.
-    - [ ] Verify Prometheus starts scraping metrics from the new node.
 
 ## Iteration 5: WireGuard & Remote Access
 **Goal:** Securely access the cluster from outside the local network.
