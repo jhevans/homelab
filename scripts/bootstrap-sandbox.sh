@@ -53,6 +53,7 @@ sudo k3d cluster create "$CLUSTER_NAME" \
     --image "$K3S_IMAGE" \
     --port "8080:80@loadbalancer" \
     --port "8443:443@loadbalancer" \
+    --k3s-arg "--disable=traefik@server:0" \
     --wait
 
 # --- 3. Export Kubeconfig ---
