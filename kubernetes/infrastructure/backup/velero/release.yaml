@@ -41,3 +41,8 @@ spec:
         volumeMounts:
           - mountPath: /target
             name: plugins
+    
+    # 5. Fix for broken bitnami/kubectl:1.34 tag in chart defaults
+    kubectl:
+      image:
+        tag: latest
