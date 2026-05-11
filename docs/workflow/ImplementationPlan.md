@@ -25,8 +25,7 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
     - [/] Deploy Velero via Flux in `kubernetes/infrastructure/backup` (In Progress).
     - [ ] Configure Restic/Kopia for file-level backups of `local-path` Persistent Volumes (specifically for Paperless-ngx).
 2.  **Backup Storage Location (BSL):**
-    - [ ] **TBC:** Select and configure a primary local BSL (e.g., MinIO or external drive).
-    - [x] **Verified:** Configured Cloudflare R2 as the secondary encrypted off-site BSL.
+    - [x] **Verified:** Configured Cloudflare R2 as the primary off-site BSL (provides protection against total hardware failure).
 3.  **Validation (The "Simulated Disaster"):**
     - [ ] Delete the `productivity` namespace.
     - [ ] Restore it using Velero + Flux.
@@ -40,6 +39,9 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 - [ ] **WireGuard Deployment:** Deploy WireGuard as a K8s deployment/service or NixOS module.
 - [ ] **Client Configuration:** Generate peer config for Android/Laptop.
 - [ ] **Validation:** Connect from an external network and ping the Mini PC's internal IP.
+
+### Data Protection (Future)
+- [ ] **Local Network Tier:** Configure a secondary backup tier to the NAS once it is commissioned (completes 3-2-1 strategy).
 
 ### Technical Debt & Maintenance
 - [ ] **Ultra-Paranoid Security Agent:** Create a dedicated agent for zero-trust analysis.

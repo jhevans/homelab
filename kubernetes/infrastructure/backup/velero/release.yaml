@@ -1,0 +1,43 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: velero
+  namespace: velero
+spec:
+  chart:
+    spec:
+      chart: velero
+      version: "7.1.0"
+      sourceRef:
+        kind: HelmRepository
+        name: vmware-tanzu
+        namespace: velero
+  interval: 1h
+  values:
+    # 1. Integration with Cloudflare R2 (S3 Compatible)
+    configuration:
+      backupStorageLocation:
+        - name: default
+          provider: aws # R2 uses the AWS S3 provider logic
+          bucket: homelab-backups
+          config:
+            region: auto
+            s3ForcePathStyle: true
+            s3Url: https://d65ccff32296861854013e208da2ed2a.r2.cloudflarestorage.com
+      # 2. Enable file-level backups (for local-path volumes)
+      nodeAgent:
+        enabled: true
+        uploaderType: kopia # Modern alternative to restic
+
+    # 3. Credentials
+    credentials:
+      useSecret: true
+      existingSecret: velero-r2-credentials
+
+    # 4. Install necessary plugins
+    initContainers:
+      - name: velero-plugin-for-aws
+        image: velero/velero-plugin-for-aws:v1.9.0
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
