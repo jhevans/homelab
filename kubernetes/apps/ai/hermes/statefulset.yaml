@@ -19,7 +19,7 @@ spec:
         fsGroup: 10000
       containers:
         - name: hermes
-          image: ghcr.io/nousresearch/hermes-agent:latest
+          image: nousresearch/hermes-agent:latest
           imagePullPolicy: Always
           env:
             - name: GOOGLE_API_KEY
@@ -31,7 +31,7 @@ spec:
               value: tcp://localhost:2375
           volumeMounts:
             - name: data
-              mountPath: /home/hermes/.hermes
+              mountPath: /opt/data
           resources:
             limits:
               cpu: "1000m"
