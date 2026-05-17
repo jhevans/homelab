@@ -19,7 +19,7 @@ spec:
         fsGroup: 10000
       containers:
         - name: hermes
-          image: nousresearch/hermes-agent:latest
+          image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
           env:
             - name: GOOGLE_API_KEY
