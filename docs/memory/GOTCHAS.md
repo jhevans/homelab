@@ -33,6 +33,11 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 - **Issue:** `configMapGenerator` without an explicit `namespace` in the `Kustomization` file may cause reconciliation failures if the parent kustomization doesn't propagate the namespace correctly.
 - **Solution:** Explicitly set `namespace: <name>` in the `kustomization.yaml` of the application directory.
 
+## 📦 Velero: Distroless kubectl Hook Failure
+- **Issue:** Velero Helm installation stalls on the `velero-upgrade-crds` job with `exec: "/bin/sh": no such file or directory`.
+- **Root Cause:** The official `registry.k8s.io/kubectl` image is distroless and lacks a shell, but the Helm chart's job template requires `/bin/sh` to perform binary copy operations.
+- **Solution:** Override the `kubectl.image` in the `HelmRelease` to a version that includes a shell, such as `bitnami/kubectl`. Alternatively, disable the job via `upgradeCRDs: false` if CRDs are already managed.
+
 ## 📦 Helm: gabe565/paperless-ngx Redis Secret Bug
 - **Issue:** Paperless-ngx pod fails with `secret "paperless-ngx-redis" not found` even if `redis.auth.enabled` is `false`.
 - **Root Cause:** The chart (v0.24.1) hardcodes a `secretKeyRef` for `A_REDIS_PASSWORD` whenever `redis.enabled` is `true`.

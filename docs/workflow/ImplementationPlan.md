@@ -22,11 +22,10 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 **Goal:** Ensure the "Genuine Utility" data in Paperless is safe from total Mini PC failure.
 
 1.  **Deploy Velero + Restic/Kopia:**
-    - [/] Deploy Velero via Flux in `kubernetes/infrastructure/backup` (In Progress).
-    - [ ] Configure Restic/Kopia for file-level backups of `local-path` Persistent Volumes (specifically for Paperless-ngx).
-2.  **Backup Storage Location (BSL):**
-    - [x] **Verified:** Configured Cloudflare R2 as the primary off-site BSL (provides protection against total hardware failure).
-3.  **Validation (The "Simulated Disaster"):**
+    - [x] Deploy Velero via Flux in `kubernetes/infrastructure/backup`.
+    - [x] **Verified:** Configured Cloudflare R2 as the primary off-site BSL.
+    - [x] **Verified:** Enabled `defaultVolumesToFsBackup` in Velero.
+2.  **Validation (The "Simulated Disaster"):**
     - [ ] Delete the `productivity` namespace.
     - [ ] Restore it using Velero + Flux.
     - [ ] **Verified:** Verify data integrity of Paperless-ngx documents after restoration.

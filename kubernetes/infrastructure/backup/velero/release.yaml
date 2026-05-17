@@ -24,17 +24,23 @@ spec:
             region: auto
             s3ForcePathStyle: true
             s3Url: https://d65ccff32296861854013e208da2ed2a.r2.cloudflarestorage.com
-      # 2. Enable file-level backups (for local-path volumes)
-      nodeAgent:
-        enabled: true
-        uploaderType: kopia # Modern alternative to restic
 
-    # 3. Credentials
+    defaultVolumesToFsBackup: true
+
+    # 2. Enable file-level backups (for local-path volumes)
+    nodeAgent:
+      enabled: true
+      uploaderType: kopia # Modern alternative to restic
+
+    # 3. Disable the upgrade job (CRDs are managed manually or already present)
+    upgradeCRDs: false
+
+    # 4. Credentials
     credentials:
       useSecret: true
       existingSecret: velero-r2-credentials
 
-    # 4. Install necessary plugins
+    # 5. Install necessary plugins
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.9.0
@@ -42,8 +48,8 @@ spec:
           - mountPath: /target
             name: plugins
     
-    # 5. Fix for broken kubectl image in chart defaults
+    # 6. Fix for broken kubectl image in chart defaults (must have a shell)
     kubectl:
       image:
-        repository: registry.k8s.io/kubectl
-        tag: v1.34.1
+        repository: bitnami/kubectl
+        tag: 1.34.0
