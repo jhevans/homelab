@@ -33,6 +33,12 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 - **Issue:** `configMapGenerator` without an explicit `namespace` in the `Kustomization` file may cause reconciliation failures if the parent kustomization doesn't propagate the namespace correctly.
 - **Solution:** Explicitly set `namespace: <name>` in the `kustomization.yaml` of the application directory.
 
+## 💀 Post-Mortem: Paperless-ngx Restore Failure (2026-05-17)
+- **Incident:** During a "Simulated Disaster" test, the `productivity` namespace was deleted and restored via Velero. While the restore reported "Completed" and files were present, the user's data and documents were not recovered.
+- **Root Cause (Suspected):** The `node-agent` (Kopia) backup may have been taken after an initial failure or incorrectly scoped, resulting in a "successful" backup of empty or initialized-state volumes.
+- **Lesson Learned:** **NEVER** delete primary data to test an unverified backup system.
+- **Corrective Action:** All future recovery tests MUST use namespace mapping (`velero restore create --from-backup <name> --namespace-mappings productivity:productivity-test`) to verify data integrity in a parallel environment first.
+
 ## 📦 Velero: Distroless kubectl Hook Failure
 - **Issue:** Velero Helm installation stalls on the `velero-upgrade-crds` job with `exec: "/bin/sh": no such file or directory`.
 - **Root Cause:** The official `registry.k8s.io/kubectl` image is distroless and lacks a shell, but the Helm chart's job template requires `/bin/sh` to perform binary copy operations.

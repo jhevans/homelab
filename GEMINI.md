@@ -10,6 +10,7 @@ The documentation is organized by intent within the `docs/` directory to maintai
 - **`docs/identity/`**: The "Soul" of the lab. High-level vision and strategy.
   - `ProjectPlan.md`: Authoritative architectural blueprint.
   - `PHILOSOPHY.md`: Guiding ethos and living principles.
+  - `RISKS.md`: Identified technical observations and vulnerabilities.
   - `AROC.md`: Vision for the agentic layer (TBC).
   - `NAS-DESIGN.md`: Strategy for stateful storage and high-speed networking.
 - **`docs/registry/`**: The "Cold" Data. Technical specifications and state.
@@ -34,6 +35,14 @@ The documentation is organized by intent within the `docs/` directory to maintai
   - Focus on **why** a change is being made over what was changed.
   - Structure: A brief first-line headline followed by a bulleted list for additional context.
   - Propose a draft commit message for user approval.
+
+## 🛡️ Safety & Data Integrity Mandates
+- **Non-Destructive Validation:** NEVER delete the primary copy of "Genuine Utility" data to test a recovery system. Always prefer non-destructive validation methods, such as:
+  - Restoring to a different namespace/prefix.
+  - Verifying file checksums within the backup.
+  - Cloning volumes to a test environment.
+- **Verification of Out-of-Band Backups:** Before performing any operation that could result in data loss, verify that at least one independent, out-of-band backup (e.g., manual export, external drive) exists and is accessible.
+- **Retention of Validation Artifacts:** Always keep backup/restore logs and objects until the user has manually verified the success of the operation.
 
 ## Workflow Mandates
 - **Surgical Updates:** Minimize changes to only what is necessary for the task.
