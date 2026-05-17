@@ -1,0 +1,12 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: paperless-safe-restore
+  namespace: velero
+spec:
+  backupName: paperless-safe-test
+  includedNamespaces:
+  - productivity
+  namespaceMapping:
+    productivity: productivity-test
+  restorePVs: true
