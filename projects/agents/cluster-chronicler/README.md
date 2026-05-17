@@ -19,6 +19,21 @@ A "throwaway" learning agent that translates Kubernetes events into a human-read
    python chronicler.py
    ```
 
+## 📦 Deployment
+
+To update the agent in the cluster, rebuild and push the Docker image:
+
+```bash
+docker build -t jhevans28/cluster-chronicler:latest .
+docker push jhevans28/cluster-chronicler:latest
+```
+
+Once pushed, trigger a job to test the latest version:
+
+```bash
+kubectl create job --from=cronjob/cluster-chronicler test-run -n ai
+```
+
 ## 🏗️ Project Structure
 - `chronicler.py`: The core logic for watching events and (eventually) talking to Ollama.
 - `requirements.txt`: Python dependencies.
