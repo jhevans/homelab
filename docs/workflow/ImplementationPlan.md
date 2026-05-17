@@ -44,6 +44,7 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 - [ ] **Local Network Tier:** Configure a secondary backup tier to the NAS once it is commissioned (completes 3-2-1 strategy).
 
 ### Technical Debt & Maintenance
+- [ ] **Automated Backup Validation:** Design a scheduled agent or workflow to perform regular, non-destructive restore tests (using namespace mapping) for all critical namespaces to verify backup integrity.
 - [ ] **Ultra-Paranoid Security Agent:** Create a dedicated agent for zero-trust analysis.
 - [ ] **Grafana Security:** Rotate Grafana admin password to a SOPS-encrypted secret.
 - [ ] **Update Monitoring:** Implement Renovate or Flux image automation for dependency audits.
