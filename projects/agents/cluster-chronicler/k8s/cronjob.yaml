@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cluster-chronicler
+  namespace: ai
+spec:
+  schedule: "0 */6 * * *" # Every 6 hours
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: cluster-chronicler
+        spec:
+          serviceAccountName: cluster-chronicler
+          containers:
+          - name: chronicler
+            image: jhevans28/cluster-chronicler:latest
+            imagePullPolicy: Always
+            env:
+            - name: WINDOW_HOURS
+              value: "6"
+            resources:
+              limits:
+                cpu: "200m"
+                memory: "128Mi"
+              requests:
+                cpu: "100m"
+                memory: "64Mi"
+          restartPolicy: OnFailure

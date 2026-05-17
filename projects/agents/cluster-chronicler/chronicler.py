@@ -1,12 +1,14 @@
 import os
 import json
 import time
+from datetime import datetime, timedelta, timezone
 import requests
-from kubernetes import client, config, watch
+from kubernetes import client, config
 
 # Configuration
 OLLAMA_URL = os.getenv("OLLAMA_URL")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:1b")
+WINDOW_HOURS = int(os.getenv("WINDOW_HOURS", "6"))
 
 def load_context():
     """Load the mapping of service names to descriptions."""
@@ -26,18 +28,25 @@ def get_context(obj_name, mapping):
             return description
     return "An unknown component of the lab."
 
-def generate_narrative(event_data):
-    """Call Ollama to generate a human-friendly narrative of the event."""
+def generate_summary(events_summary):
+    """Call Ollama to generate a human-friendly summary of the events."""
+    if not events_summary:
+        return "The cluster was peacefully quiet. No notable events to report."
+
     prompt = f"""
 You are the 'Cluster Chronicler', an AI assistant for a home lab. 
-Your job is to translate technical Kubernetes events into a friendly, narrative sentence.
+Your job is to provide a concise, friendly summary of Kubernetes events from the last {WINDOW_HOURS} hours.
 
-Context: {event_data['context']}
-Technical Event: {event_data['reason']} for {event_data['object']} in namespace {event_data['namespace']}.
-Message: {event_data['message']}
+Focus on:
+- Notable, concerning, or interesting behavior.
+- Use the 'context' provided to make it personal.
+- Ignore routine noise (e.g., successful pod startups, standard scaling).
 
-Instruction: Write a single, concise, and friendly sentence describing what happened. Use the Context to make it more personal.
-Narrative:"""
+Events for this period:
+{json.dumps(events_summary, indent=2)}
+
+Instruction: Write a short, engaging report (3-5 sentences) summarizing what happened.
+Report:"""
 
     try:
         response = requests.post(
@@ -47,7 +56,7 @@ Narrative:"""
                 "prompt": prompt,
                 "stream": False
             },
-            timeout=30
+            timeout=60
         )
         if response.status_code == 200:
             return response.json().get('response', '').strip()
@@ -69,38 +78,59 @@ def main():
         if not OLLAMA_URL:
             OLLAMA_URL = "http://localhost:11434"
         print(f"🏠 Running locally. Target Ollama: {OLLAMA_URL}")
-        print("   (Tip: Run 'kubectl port-forward -n ai svc/ollama-cpu 11434:11434' to connect)")
 
     mapping = load_context()
     v1 = client.CoreV1Api()
-    w = watch.Watch()
 
-    print(f"📺 Watching for Cluster Events using model '{OLLAMA_MODEL}'...")
-
+    print(f"⌛ Gathering events from the last {WINDOW_HOURS} hours...")
+    
+    start_time = datetime.now(timezone.utc) - timedelta(hours=WINDOW_HOURS)
+    
     try:
-        for event in w.stream(v1.list_event_for_all_namespaces):
-            obj = event['object']
-            
-            # Filter for only 'Normal' or 'Warning' events to reduce noise
-            if obj.type not in ['Normal', 'Warning']:
+        events = v1.list_event_for_all_namespaces()
+        relevant_events = []
+        
+        # Simple deduplication/aggregation to save tokens
+        seen_event_keys = set()
+
+        for obj in events.items:
+            # Check if event is within our window
+            event_time = obj.last_timestamp or obj.event_time or obj.metadata.creation_timestamp
+            if not event_time or event_time < start_time:
                 continue
 
-            event_data = {
+            # Ignore non-warning/normal noise
+            if obj.type not in ['Normal', 'Warning']:
+                continue
+            
+            # Create a unique key for grouping identical repeating events
+            event_key = f"{obj.metadata.namespace}/{obj.involved_object.name}/{obj.reason}"
+            if event_key in seen_event_keys and obj.type == 'Normal':
+                continue
+            
+            seen_event_keys.add(event_key)
+
+            relevant_events.append({
                 "reason": obj.reason,
                 "message": obj.message,
                 "namespace": obj.metadata.namespace,
                 "object": obj.involved_object.name,
+                "type": obj.type,
                 "context": get_context(obj.involved_object.name, mapping)
-            }
+            })
 
-            # Generate and print the narrative
-            narrative = generate_narrative(event_data)
-            
-            print(f"📖 {narrative}")
-            print(f"   (Technical: {event_data['namespace']}/{event_data['object']} -> {event_data['reason']})\n")
+        print(f"🔍 Found {len(relevant_events)} unique events. Generating summary...")
+        
+        report = generate_summary(relevant_events)
+        
+        print("\n" + "="*40)
+        print(f"📖 CLUSTER CHRONICLE: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+        print("="*40)
+        print(f"\n{report}\n")
+        print("="*40)
 
     except Exception as e:
-        print(f"❌ Error watching events: {e}")
+        print(f"❌ Error processing events: {e}")
 
 if __name__ == "__main__":
     main()
