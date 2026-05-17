@@ -3,6 +3,3 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - velero
-  - paperless-safe-test.yaml
-  - test-namespace.yaml
-  - paperless-safe-restore.yaml
