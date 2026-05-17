@@ -31,9 +31,11 @@ spec:
                   name: hermes-secrets
                   key: GOOGLE_API_KEY
             - name: PROVIDER
-              value: "google"
+              value: "ollama"
+            - name: OLLAMA_BASE_URL
+              value: "http://ollama-cpu.ai.svc.cluster.local:11434"
             - name: MODEL
-              value: "gemini-1.5-pro"
+              value: "llama3.2:1b"
             - name: TELEGRAM_BOT_TOKEN
               valueFrom:
                 secretKeyRef:
