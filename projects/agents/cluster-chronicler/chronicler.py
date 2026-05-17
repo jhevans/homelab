@@ -29,24 +29,20 @@ def get_context(obj_name, mapping):
     return "An unknown component of the lab."
 
 def generate_summary(events_summary):
-    """Call Ollama to generate a human-friendly summary of the events."""
+    """Call Ollama to generate a high-signal summary."""
     if not events_summary:
-        return "The cluster was peacefully quiet. No notable events to report."
+        return "The cluster is humming along nicely with no major changes or issues."
 
     prompt = f"""
-You are the 'Cluster Chronicler', an AI assistant for a home lab. 
-Your job is to provide a concise, friendly summary of Kubernetes events from the last {WINDOW_HOURS} hours.
+Summarize these Kubernetes events in NO MORE than two sentences.
+- Mention only NEWly created services or CLEARLY BREAKING issues.
+- Use the 'context' provided to identify the purpose of the apps.
+- If everything looks like standard scaling or setup, say 'The cluster is humming along nicely.'
+- DO NOT use greetings, chatty introductions, or sign-offs.
 
-Focus on:
-- Notable, concerning, or interesting behavior.
-- Use the 'context' provided to make it personal.
-- Ignore routine noise (e.g., successful pod startups, standard scaling).
-
-Events for this period:
-{json.dumps(events_summary, indent=2)}
-
-Instruction: Write a short, engaging report (3-5 sentences) summarizing what happened.
-Report:"""
+Events:
+{json.dumps(events_summary)}
+"""
 
     try:
         response = requests.post(
