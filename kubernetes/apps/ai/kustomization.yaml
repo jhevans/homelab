@@ -5,3 +5,4 @@ resources:
   - ollama-cpu
   - open-webui
   - cluster-chronicler
+  - hermes
