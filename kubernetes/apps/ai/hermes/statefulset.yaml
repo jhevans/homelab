@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hermes
+  namespace: ai
+spec:
+  serviceName: hermes
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hermes
+  template:
+    metadata:
+      labels:
+        app: hermes
+    spec:
+      serviceAccountName: hermes
+      securityContext:
+        fsGroup: 10000
+      containers:
+        - name: hermes
+          image: ghcr.io/nousresearch/hermes-agent:latest
+          imagePullPolicy: Always
+          env:
+            - name: GOOGLE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-secrets
+                  key: GOOGLE_API_KEY
+            - name: DOCKER_HOST
+              value: tcp://localhost:2375
+          volumeMounts:
+            - name: data
+              mountPath: /home/hermes/.hermes
+          resources:
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+
+        # The Sandbox: Docker-in-Docker sidecar
+        - name: sandbox
+          image: docker:dind
+          securityContext:
+            privileged: true # Required for DIND
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: "" # Disable TLS for local sidecar communication
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hermes-data
