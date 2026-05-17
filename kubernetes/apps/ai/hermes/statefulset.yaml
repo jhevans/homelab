@@ -34,8 +34,18 @@ spec:
               value: "google"
             - name: MODEL
               value: "gemini-1.5-pro"
+            - name: TELEGRAM_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-secrets
+                  key: TELEGRAM_BOT_TOKEN
+            - name: TELEGRAM_ALLOWED_USERS
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-secrets
+                  key: TELEGRAM_ALLOWED_USERS
             - name: GATEWAY_ALLOW_ALL_USERS
-              value: "true"
+              value: "false"
             - name: DOCKER_HOST
               value: tcp://localhost:2375
           volumeMounts:
