@@ -38,6 +38,10 @@ spec:
                 href: http://status.lab.local
                 description: Service Status Page
         - AI:
+            - Hermes:
+                icon: hermes.png
+                href: http://hermes.lab.local
+                description: Autonomous Agent Hub
             - Open WebUI:
                 icon: open-webui.png
                 href: http://ai.lab.local
