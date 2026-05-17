@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: velero
-      version: "7.1.0"
+      version: "7.2.2" # Upgrading from 7.1.0 to resolve VolumeSnapshotLocation validation bug
       sourceRef:
         kind: HelmRepository
         name: vmware-tanzu
@@ -24,23 +24,28 @@ spec:
             region: auto
             s3ForcePathStyle: true
             s3Url: https://d65ccff32296861854013e208da2ed2a.r2.cloudflarestorage.com
+      
+      # Explicitly empty list to avoid auto-creation of invalid "default" location in chart 7.1.0+
+      volumeSnapshotLocation: []
 
+    # 2. Disable native snapshots (using Kopia/node-agent instead for local-path volumes)
+    snapshotsEnabled: false
+
+    # 3. Enable file-level backups (for local-path volumes)
     defaultVolumesToFsBackup: true
-
-    # 2. Enable file-level backups (for local-path volumes)
     nodeAgent:
       enabled: true
       uploaderType: kopia # Modern alternative to restic
 
-    # 3. Disable the upgrade job (CRDs are managed manually or already present)
+    # 4. Disable the upgrade job (CRDs are managed manually or already present)
     upgradeCRDs: false
 
-    # 4. Credentials
+    # 5. Credentials
     credentials:
       useSecret: true
       existingSecret: velero-r2-credentials
 
-    # 5. Install necessary plugins
+    # 6. Install necessary plugins
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.9.0
@@ -48,7 +53,7 @@ spec:
           - mountPath: /target
             name: plugins
     
-    # 6. Fix for broken kubectl image in chart defaults (must have a shell)
+    # 7. Fix for broken kubectl image in chart defaults (must have a shell)
     kubectl:
       image:
         repository: bitnami/kubectl
