@@ -31,6 +31,20 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
     - [x] Restore it using Velero + Flux.
     - [x] **Verified:** Data integrity of Paperless-ngx documents and PostgreSQL database confirmed after restoration.
 
+## Iteration 3: The Persistent Agent Hub (Hermes)
+**Goal:** Deploy a self-improving, durable agent with persistent memory and secure sandboxing.
+
+1. **Deployment (Cluster):**
+   - [x] Storage: Create 5Gi PVC for persistent memory and skills.
+   - [x] Security: Define read-only RBAC ServiceAccount.
+   - [x] Hub: Deploy StatefulSet with Messaging Gateway and Web UI.
+   - [x] Sandbox: Integrate Docker-in-Docker (DIND) sidecar for secure execution.
+2. **Integration:**
+   - [x] Ingress: Expose via `hermes.lab.local` (Temporarily unauthenticated).
+   - [ ] **Security:** Re-enable Authelia authentication for `hermes.lab.local` once the global SSO setup is finalized.
+   - [x] DNS: Added routing rule to AdGuard Home.
+   - [x] Dashboard: Added to Homepage portal.
+
 ---
 
 ## 📋 Unprioritized Backlog
