@@ -29,14 +29,17 @@ spec:
       
       # Enable automatic filesystem backups for all volumes
       defaultVolumesToFsBackup: true
-
-    # 2. Disable native snapshots (using Kopia/node-agent instead)
-    snapshotsEnabled: false
-
-    # 3. Enable node-agent for file-level backups
-    nodeAgent:
-      enabled: true
+      # Modern uploader (replaces restic)
       uploaderType: kopia
+
+    # 2. Disable native snapshots and enable node-agent daemonset
+    snapshotsEnabled: false
+    deployNodeAgent: true
+
+    # 3. Node Agent configuration
+    nodeAgent:
+      podVolumePath: /var/lib/kubelet/pods
+      privileged: false
 
     # 4. Disable the upgrade job
     upgradeCRDs: false
