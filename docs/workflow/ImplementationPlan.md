@@ -25,10 +25,11 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
     - [x] Deploy Velero via Flux in `kubernetes/infrastructure/backup`.
     - [x] **Verified:** Configured Cloudflare R2 as the primary off-site BSL.
     - [x] **Verified:** Enabled `defaultVolumesToFsBackup` in Velero.
+    - [x] **Verified:** Implemented `cluster-daily` schedule for all non-system namespaces.
 2.  **Validation (The "Simulated Disaster"):**
-    - [ ] Delete the `productivity` namespace.
-    - [ ] Restore it using Velero + Flux.
-    - [ ] **Verified:** Verify data integrity of Paperless-ngx documents after restoration.
+    - [x] Delete the `productivity` namespace.
+    - [x] Restore it using Velero + Flux.
+    - [x] **Verified:** Data integrity of Paperless-ngx documents and PostgreSQL database confirmed after restoration.
 
 ---
 

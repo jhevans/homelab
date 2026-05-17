@@ -24,6 +24,12 @@ We want to optimize for the performance-to-cost ratio by syncing our "heavy" wor
 - **Free Energy:** Maximize resource usage when electricity is effectively free (solar surplus, Octopus savings).
 - **On-Demand Power:** Outside of those windows, we prioritize efficiency but keep the system capable of scaling up instantly when needed.
 
+## 🎓 Learning by Doing (Core Purpose)
+The lab is primarily a tool for education and personal growth.
+- **Experimental Mindset:** We value the process of building and breaking over the "perfect" final state.
+- **DevEx as a Priority:** Developer Experience (DevEx) is a critical requirement. Projects should be designed for high success probability through small iterations and clear learning outcomes.
+- **Throwaway Prototypes:** We encourage "throwaway" projects to bridge knowledge gaps without the burden of long-term maintenance.
+
 ## 🛡️ Evolving Security Posture
 Security isn't a "solved" problem but a continuous practice.
 - **Dedicated Focus:** We treat security hardening as a recurring backlog item, not a one-time setup.

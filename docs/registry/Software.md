@@ -18,7 +18,14 @@ This document tracks the definitive software stack for the homelab. All software
 | **DNS Automation** | External-DNS | Automatic DNS record creation in AdGuard Home. |
 | **Automation** | Renovate Bot | Automated dependency updates for Helm/Images. |
 
-## 3. Networking & Security
+## 3. Data Protection
+| Component | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Backup** | [Velero](https://velero.io/) | Cluster-wide backup and disaster recovery. |
+| **Uploader** | [Kopia](https://kopia.io/) | File-level backups of Persistent Volumes. |
+| **Off-site** | [Cloudflare R2](https://www.cloudflare.com/lp/pg-r2/) | S3-compatible off-site storage (Egress-free). |
+
+## 4. Networking & Security
 | Component | Technology | Purpose |
 | :--- | :--- | :--- |
 | **VPN** | [WireGuard](https://www.wireguard.com/) | Secure remote access. |
@@ -27,7 +34,7 @@ This document tracks the definitive software stack for the homelab. All software
 | **Auth/SSO** | Authentik / Authelia | Unified authentication and SSO dashboard. |
 | **Vault** | Vaultwarden | Lightweight Bitwarden-compatible password manager. |
 
-## 4. Observability
+## 5. Observability
 | Component | Technology | Purpose |
 | :--- | :--- | :--- |
 | **Metrics** | Prometheus | Cluster-wide metrics scraping. |
@@ -35,14 +42,14 @@ This document tracks the definitive software stack for the homelab. All software
 | **Status Page** | Uptime Kuma | Service availability monitoring. |
 | **Logging** | Loki + Alloy | Log aggregation and search. |
 
-## 5. Productivity & AI
+## 6. Productivity & AI
 | Component | Technology | Purpose |
 | :--- | :--- | :--- |
 | **AI Inference** | [Ollama](https://ollama.com/) | Local LLM hosting. |
 | **AI Interface** | Open WebUI | ChatGPT-like UI for local models. |
 | **Documents** | [Paperless-ngx](https://docs.paperless-ngx.com/) | OCR-indexed document management. |
 
-## 6. Home & Media
+## 7. Home & Media
 | Component | Technology | Purpose |
 | :--- | :--- | :--- |
 | **Home Automation** | [Home Assistant](https://www.home-assistant.io/) | Smart home hub. |

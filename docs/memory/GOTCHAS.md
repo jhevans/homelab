@@ -39,6 +39,11 @@ This document tracks non-obvious behaviors, environmental constraints, and commo
 - **Lesson Learned:** **NEVER** delete primary data to test an unverified backup system.
 - **Corrective Action:** All future recovery tests MUST use namespace mapping (`velero restore create --from-backup <name> --namespace-mappings productivity:productivity-test`) to verify data integrity in a parallel environment first.
 
+## 🔄 Flux: Reconcile Stalls on Failed Updates
+- **Issue:** Running `flux reconcile` (especially for `HelmRelease`) often hangs indefinitely in the CLI if the underlying update is failing or stuck in a retry loop.
+- **Gotcha:** The CLI waits for the reconciliation to reach a "Ready" state, which may never happen if there is a persistent error (like an immutable field conflict).
+- **Best Practice:** Run reconciliation asynchronously (or in the background) and monitor progress explicitly via `kubectl get hr` or by checking controller logs.
+
 ## 📦 Velero: Distroless kubectl Hook Failure
 - **Issue:** Velero Helm installation stalls on the `velero-upgrade-crds` job with `exec: "/bin/sh": no such file or directory`.
 - **Root Cause:** The official `registry.k8s.io/kubectl` image is distroless and lacks a shell, but the Helm chart's job template requires `/bin/sh` to perform binary copy operations.
