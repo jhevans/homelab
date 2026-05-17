@@ -52,7 +52,7 @@ Events:
                 "prompt": prompt,
                 "stream": False
             },
-            timeout=60
+            timeout=300
         )
         if response.status_code == 200:
             return response.json().get('response', '').strip()
@@ -86,8 +86,11 @@ def main():
         events = v1.list_event_for_all_namespaces()
         relevant_events = []
         
-        # Simple deduplication/aggregation to save tokens
-        seen_event_keys = set()
+        # Routine noise to ignore completely
+        NOISE_REASONS = [
+            'ArtifactUpToDate', 'ReconciliationSucceeded', 'Pulling', 'Pulled', 
+            'Scheduled', 'Started', 'Created', 'Killing', 'Progressing'
+        ]
 
         for obj in events.items:
             # Check if event is within our window
@@ -95,28 +98,24 @@ def main():
             if not event_time or event_time < start_time:
                 continue
 
-            # Ignore non-warning/normal noise
-            if obj.type not in ['Normal', 'Warning']:
+            # Only care about Warnings or specific creation events
+            if obj.type != 'Warning' and obj.reason not in ['SuccessfulCreate', 'Failed']:
                 continue
             
-            # Create a unique key for grouping identical repeating events
-            event_key = f"{obj.metadata.namespace}/{obj.involved_object.name}/{obj.reason}"
-            if event_key in seen_event_keys and obj.type == 'Normal':
+            if obj.reason in NOISE_REASONS:
                 continue
-            
-            seen_event_keys.add(event_key)
 
             relevant_events.append({
                 "reason": obj.reason,
                 "message": obj.message,
                 "namespace": obj.metadata.namespace,
                 "object": obj.involved_object.name,
-                "type": obj.type,
                 "context": get_context(obj.involved_object.name, mapping)
             })
 
-        print(f"🔍 Found {len(relevant_events)} unique events. Generating summary...")
-        
+        # Limit to the most recent 20 events to avoid prompt truncation and timeouts
+        relevant_events = relevant_events[-20:]
+
         report = generate_summary(relevant_events)
         
         print("\n" + "="*40)
