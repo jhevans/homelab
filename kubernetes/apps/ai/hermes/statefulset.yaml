@@ -52,19 +52,13 @@ spec:
         - name: dashboard
           image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
-          args: ["dashboard"]
+          args: ["dashboard", "--host", "0.0.0.0", "--port", "9119", "--insecure", "--no-open"]
           env:
             - name: GOOGLE_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: hermes-secrets
                   key: GOOGLE_API_KEY
-            - name: DASHBOARD_ENABLED
-              value: "true"
-            - name: DASHBOARD_HOST
-              value: "0.0.0.0"
-            - name: DASHBOARD_PORT
-              value: "9119"
           volumeMounts:
             - name: data
               mountPath: /opt/data
