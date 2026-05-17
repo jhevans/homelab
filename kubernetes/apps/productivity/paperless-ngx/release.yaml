@@ -59,10 +59,11 @@ spec:
       image:
         repository: bitnami/postgresql
         tag: latest
-      persistence:
-        enabled: true
-        size: 5Gi
-        storageClass: local-path
-        accessMode: ReadWriteOnce
+      primary:
+        persistence:
+          enabled: true
+          size: 5Gi
+          storageClass: local-path
+          accessMode: ReadWriteOnce
     redis:
       enabled: false
