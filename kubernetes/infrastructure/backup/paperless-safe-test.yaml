@@ -1,0 +1,12 @@
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: paperless-safe-test
+  namespace: velero
+  labels:
+    test: safety-validation
+spec:
+  includedNamespaces:
+  - productivity
+  storageLocation: default
+  ttl: 2h0m0s
