@@ -67,6 +67,10 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
 - [ ] **Alerting:** Implement reliable alerting for mission-critical services.
 - [ ] **Energy-Aware Scheduling:** Design workload shifting for "free energy" windows.
 
+### Persistent Agent Hub (Hermes) Refinements
+- [ ] **Development Sandbox:** Provision a `hermes-dev` instance to safely test new LLM providers (Ollama), skills, and experimental configurations without impacting production.
+- [ ] **Unified SSO:** Integrate Hermes with Authelia once global SSO standards are finalized.
+
 ### Autonomous Research & Operations Center (AROC) - [DRAFT/TBC]
 - [ ] **Phase 1: The Intelligent Foundation** (Inference Proxy, Vector DB, Event Bus, Registry).
 - [ ] **Phase 2: The Agentic Workforce** (Dev, Auditor, Scout, Knowledge, Red Team Agents).
