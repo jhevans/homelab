@@ -1,0 +1,8 @@
+model:
+  default: gemini-1.5-pro
+  provider: google
+providers:
+  google:
+    api_key_env: GOOGLE_API_KEY
+  ollama:
+    base_url: http://ollama-cpu.ai.svc.cluster.local:11434/v1
