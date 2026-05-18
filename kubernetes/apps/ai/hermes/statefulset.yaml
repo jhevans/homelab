@@ -30,6 +30,12 @@ spec:
                 secretKeyRef:
                   name: hermes-secrets
                   key: GOOGLE_API_KEY
+            - name: PROVIDER
+              value: "ollama"
+            - name: OLLAMA_BASE_URL
+              value: "http://ollama-cpu.ai.svc.cluster.local:11434"
+            - name: MODEL
+              value: "llama3.2:1b"
             - name: TELEGRAM_BOT_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -47,9 +53,6 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data
-            - name: config
-              mountPath: /opt/data/config.yaml
-              subPath: config.yaml
           resources:
             limits:
               cpu: "1000m"
@@ -71,9 +74,6 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data
-            - name: config
-              mountPath: /opt/data/config.yaml
-              subPath: config.yaml
           resources:
             limits:
               cpu: "500m"
@@ -102,6 +102,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: hermes-data
-        - name: config
-          configMap:
-            name: hermes-config
