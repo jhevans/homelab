@@ -7,8 +7,3 @@ resources:
   - service.yaml
   - secrets.yaml
   - ingress.yaml
-
-configMapGenerator:
-  - name: hermes-config
-    files:
-      - config.yaml
