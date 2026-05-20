@@ -22,43 +22,43 @@ spec:
         - Networking:
             - AdGuard Home:
                 icon: adguard-home.png
-                href: http://adguard.lab.local
+                href: http://adguard.evans-lab.com
                 description: DNS Sinkhole & AdBlocker
         - Monitoring:
             - Headlamp:
                 icon: headlamp.png
-                href: http://headlamp.lab.local
+                href: http://headlamp.evans-lab.com
                 description: Kubernetes Dashboard
             - Grafana:
                 icon: grafana.png
-                href: http://grafana.lab.local
+                href: http://grafana.evans-lab.com
                 description: Metrics & Dashboards
             - Uptime Kuma:
                 icon: uptime-kuma.png
-                href: http://status.lab.local
+                href: http://status.evans-lab.com
                 description: Service Status Page
         - AI:
             - Hermes:
                 icon: hermes.png
-                href: http://hermes.lab.local
+                href: http://hermes.evans-lab.com
                 description: Autonomous Agent Hub
             - Open WebUI:
                 icon: open-webui.png
-                href: http://ai.lab.local
+                href: http://ai.evans-lab.com
                 description: Local LLM Interface
             - Ollama (CPU):
                 icon: ollama.png
-                href: http://ollama.lab.local
+                href: http://ollama.evans-lab.com
                 description: AI Backend (CPU)
         - Development:
             - Forgejo:
                 icon: forgejo.png
-                href: http://forgejo.lab.local
+                href: http://forgejo.evans-lab.com
                 description: Internal Git Forge
         - Productivity:
             - Paperless-ngx:
                 icon: paperless-ngx.png
-                href: http://paperless.lab.local
+                href: http://paperless.evans-lab.com
                 description: Document Management System
       bookmarks:
         - Developer:
@@ -96,7 +96,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: web
         hosts:
-          - host: lab.local
+          - host: evans-lab.com
             paths:
               - path: /
                 pathType: Prefix

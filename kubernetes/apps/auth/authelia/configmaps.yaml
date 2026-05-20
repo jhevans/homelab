@@ -20,8 +20,8 @@ data:
       name: authelia_session
       secret: "placeholder-secret" # Overridden by env var
       cookies:
-        - domain: lab.local
-          authelia_url: https://auth.lab.local
+        - domain: evans-lab.com
+          authelia_url: https://auth.evans-lab.com
 
     storage:
       local:
@@ -51,6 +51,6 @@ data:
         displayname: "John"
         # Password is 'authelia'
         password: "$argon2id$v=19$m=65536,t=3,p=4$d3VzLg2+1r4jjLzV+temqQ$UGK/5hwA+iaXKKYZjdrqHgSxUPC8ZkDWfBWXCmsoSks"
-        email: john@lab.local
+        email: john@evans-lab.com
         groups:
           - admins

@@ -24,12 +24,12 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: paperless.lab.local
+          - host: paperless.evans-lab.com
             paths:
               - path: /
                 pathType: Prefix
     env:
-      PAPERLESS_URL: http://paperless.lab.local
+      PAPERLESS_URL: http://paperless.evans-lab.com
       PAPERLESS_TIME_ZONE: UTC
       PAPERLESS_REDIS: redis://paperless-redis:6379
     image:

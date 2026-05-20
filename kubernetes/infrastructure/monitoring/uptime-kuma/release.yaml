@@ -19,7 +19,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: web
       hosts:
-        - host: status.lab.local
+        - host: status.evans-lab.com
           paths:
             - path: /
               pathType: Prefix

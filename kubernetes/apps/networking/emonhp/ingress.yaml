@@ -7,7 +7,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: emonhp.lab.local
+    - host: emonhp.evans-lab.com
       http:
         paths:
           - path: /

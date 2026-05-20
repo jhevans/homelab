@@ -35,8 +35,8 @@ spec:
         APP_NAME: "Forgejo: Home Lab"
         RUN_MODE: prod
         server:
-          DOMAIN: forgejo.lab.local
-          ROOT_URL: "http://forgejo.lab.local/"
+          DOMAIN: forgejo.evans-lab.com
+          ROOT_URL: "http://forgejo.evans-lab.com/"
           SSH_PORT: 2222
         database:
           DB_TYPE: sqlite3

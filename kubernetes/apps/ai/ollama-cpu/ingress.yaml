@@ -7,7 +7,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: ollama.lab.local
+  - host: ollama.evans-lab.com
     http:
       paths:
       - backend:
