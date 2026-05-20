@@ -2,7 +2,8 @@
 
 # Hermes Secret Updater
 # Allows updating SOPS-encrypted Kubernetes secrets via CLI.
-# Usage: ./scripts/update_secret.sh GITHUB_TOKEN=your_token_here
+# Usage: ./scripts/update_secret.sh GITHUB_TOKEN=your_token_here [secret_file_path]
+# Example: ./scripts/update_secret.sh api-token=your_cloudflare_token kubernetes/infrastructure/cert-manager/cloudflare-api-token-secret.yaml
 
 set -e
 
@@ -17,7 +18,7 @@ KEY=$(echo "$1" | cut -d= -f1)
 VALUE=$(echo "$1" | cut -d= -f2-)
 
 # Target secret file
-SECRET_FILE="kubernetes/apps/ai/hermes/secrets.yaml"
+SECRET_FILE="${2:-kubernetes/apps/ai/hermes/secrets.yaml}"
 
 if [ ! -f "$SECRET_FILE" ]; then
     echo "Error: $SECRET_FILE not found. Please run this script from the root of the homelab repository."
@@ -39,7 +40,7 @@ sops --set "[\"stringData\"][\"$KEY\"] \"$VALUE\"" "$SECRET_FILE"
 
 # Stage and commit
 git add "$SECRET_FILE"
-git commit -m "chore(secrets): update $KEY in hermes-secrets"
+git commit -m "chore(secrets): update $KEY in $(basename "$SECRET_FILE")"
 
 echo "--------------------------------------------------"
 echo "✅ Successfully updated and committed $KEY."
