@@ -25,6 +25,11 @@ spec:
           tty: true
           stdin: true
           env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-secrets
+                  key: GITHUB_TOKEN
             - name: GOOGLE_API_KEY
               valueFrom:
                 secretKeyRef:
