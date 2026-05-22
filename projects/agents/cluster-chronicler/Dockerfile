@@ -1,5 +1,5 @@
 # Use a slim Python image for a smaller footprint
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 # Create a non-root user for security (Learning Outcome: Secure Containers)
 RUN useradd -m chronicler
