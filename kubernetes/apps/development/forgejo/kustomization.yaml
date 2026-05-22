@@ -4,3 +4,5 @@ resources:
   - repository.yaml
   - release.yaml
   - ingress.yaml
+  - runner-secrets.yaml
+  - runner.yaml
