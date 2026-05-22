@@ -34,6 +34,8 @@ spec:
       config:
         APP_NAME: "Forgejo: Home Lab"
         RUN_MODE: prod
+        actions:
+          ENABLED: true
         server:
           DOMAIN: forgejo.evans-lab.com
           ROOT_URL: "http://forgejo.evans-lab.com/"
