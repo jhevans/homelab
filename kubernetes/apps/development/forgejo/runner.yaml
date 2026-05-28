@@ -38,7 +38,7 @@ spec:
               exec /bin/forgejo-runner daemon
           env:
             - name: GITEA_INSTANCE_URL
-              value: "http://forgejo.development.svc.cluster.local:3000"
+              value: "http://forgejo-http.development.svc.cluster.local:3000"
             - name: GITEA_RUNNER_REGISTRATION_TOKEN
               valueFrom:
                 secretKeyRef:
