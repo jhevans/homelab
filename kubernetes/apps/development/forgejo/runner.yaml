@@ -18,6 +18,24 @@ spec:
       containers:
         - name: runner
           image: data.forgejo.org/forgejo/runner:3.3.0
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until [ -S /var/run/docker.sock ]; do
+                echo "Waiting for docker socket..."
+                sleep 2
+              done
+              if [ ! -f /data/.runner ] && [ ! -f .runner ]; then
+                echo "Registering runner..."
+                /bin/forgejo-runner register \
+                  --instance "$GITEA_INSTANCE_URL" \
+                  --token "$GITEA_RUNNER_REGISTRATION_TOKEN" \
+                  --name "$GITEA_RUNNER_NAME" \
+                  --labels "$GITEA_RUNNER_LABELS" \
+                  --no-interactive
+              fi
+              echo "Starting daemon..."
+              exec /bin/forgejo-runner daemon
           env:
             - name: GITEA_INSTANCE_URL
               value: "http://forgejo.development.svc.cluster.local:3000"
