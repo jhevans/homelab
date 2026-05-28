@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: runner
-          image: code.forgejo.org/forgejo/act_runner:latest
+          image: data.forgejo.org/forgejo/runner:3.3.0
           env:
             - name: GITEA_INSTANCE_URL
               value: "http://forgejo.development.svc.cluster.local:3000"
