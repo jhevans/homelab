@@ -20,7 +20,7 @@ spec:
         - name: kube-aura
           image: jhevans28/kube-aura:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
               name: http
           livenessProbe:
             httpGet:
