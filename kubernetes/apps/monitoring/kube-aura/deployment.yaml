@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-aura
+  namespace: monitoring
+  labels:
+    app: kube-aura
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-aura
+  template:
+    metadata:
+      labels:
+        app: kube-aura
+    spec:
+      serviceAccountName: kube-aura
+      containers:
+        - name: kube-aura
+          image: jhevans28/kube-aura:latest
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

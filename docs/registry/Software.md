@@ -39,6 +39,7 @@ This document tracks the definitive software stack for the homelab. All software
 | :--- | :--- | :--- |
 | **Metrics** | Prometheus | Cluster-wide metrics scraping. |
 | **Dashboards** | Grafana | Visualization and alerting. |
+| **Visualizer** | [kube-aura](https://github.com/jhevans/kube-aura) | Real-time cluster visualization. |
 | **Status Page** | Uptime Kuma | Service availability monitoring. |
 | **Logging** | Loki + Alloy | Log aggregation and search. |
 

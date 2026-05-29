@@ -29,6 +29,10 @@ spec:
                 icon: headlamp.png
                 href: http://headlamp.lab.local
                 description: Kubernetes Dashboard
+            - Kube-Aura:
+                icon: kubernetes.png
+                href: http://kube-aura.lab.local
+                description: Cluster Visualizer
             - Grafana:
                 icon: grafana.png
                 href: http://grafana.lab.local

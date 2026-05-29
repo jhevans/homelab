@@ -45,6 +45,15 @@ This plan breaks down the [ProjectPlan.md](../identity/ProjectPlan.md) into smal
    - [x] DNS: Added routing rule to AdGuard Home.
    - [x] Dashboard: Added to Homepage portal.
 
+## Iteration 4: Cluster Observability & Visualization
+**Goal:** Enhance cluster visibility with real-time visualization.
+
+1. **Deployment (Cluster):**
+   - [x] RBAC: Defined ClusterRole and ServiceAccount for `kube-aura`.
+   - [x] Deploy: Create raw Kubernetes manifests (Deployment, Service, Ingress) for `kube-aura`.
+   - [x] Integration: Expose via `kube-aura.lab.local`.
+   - [x] Dashboard: Added to Homepage portal.
+
 ---
 
 ## 📋 Unprioritized Backlog

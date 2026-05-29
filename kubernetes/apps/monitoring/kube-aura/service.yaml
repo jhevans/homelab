@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-aura
+  namespace: monitoring
+spec:
+  selector:
+    app: kube-aura
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http
+      name: http
