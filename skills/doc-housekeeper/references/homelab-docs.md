@@ -8,7 +8,7 @@ This reference defines the purpose and "Source of Truth" (SoT) for each document
 *The "Soul" of the lab. Strategy and Vision.*
 - **`ProjectPlan.md`**: Primary SoT for **Architecture**.
 - **`PHILOSOPHY.md`**: Primary SoT for **Values**.
-- **`AROC.md`**: Future Vision.
+- **`archive/AROC.md`**: Spitball ideas for the agentic layer (Archived).
 
 ### 2. Registry (`docs/registry/`)
 *The "Cold" Data. Specifications and Facts.*

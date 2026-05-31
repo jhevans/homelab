@@ -11,7 +11,7 @@ The documentation is organized by intent within the `docs/` directory to maintai
   - `ProjectPlan.md`: Authoritative architectural blueprint.
   - `PHILOSOPHY.md`: Guiding ethos and living principles.
   - `RISKS.md`: Identified technical observations and vulnerabilities.
-  - `AROC.md`: Vision for the agentic layer (TBC).
+  - `archive/AROC.md`: Archived initial brainstorm ideas for the agentic layer (Spitball/Non-prescriptive).
   - `NAS-DESIGN.md`: Strategy for stateful storage and high-speed networking.
 - **`docs/registry/`**: The "Cold" Data. Technical specifications and state.
   - `IPAM.md`: Static IP assignments and network topology.
