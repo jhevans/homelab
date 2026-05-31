@@ -1,8 +1,8 @@
-# 🤖 Autonomous Research & Operations Center (AROC)
+# 🗄️ [ARCHIVED] Autonomous Research & Operations Center (AROC)
 
-> [!CAUTION]
-> **STATUS: TBC (To Be Confirmed)**
-> This is a **machine-generated blueprint** intended for spurring ideas and brainstorming. It is **NOT** a concrete implementation plan and requires manual review and validation before any action is taken.
+> [!WARNING]
+> **STATUS: ARCHIVED / SPITBALLED**
+> This document has been **archived** as of May 31, 2026. The concepts described here were part of an initial brainstorming session and do not represent our current implementation roadmap. We are following an **evolutionary and iterative path**, rather than a prescriptive or rigid master-plan. This document remains here for historical reference and ideas, not as gospel.
 
 This document serves as the high-level vision for the agentic layer of the home lab, moving from foundational infrastructure to high-level "LifeOps" utility.
 
