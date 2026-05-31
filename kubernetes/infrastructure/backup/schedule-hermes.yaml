@@ -1,0 +1,12 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: hermes-four-hourly
+  namespace: velero
+spec:
+  schedule: "0 */4 * * *"
+  template:
+    includedNamespaces:
+    - ai
+    storageLocation: default
+    ttl: 72h0m0s # Retain for 3 days (18 backups)
