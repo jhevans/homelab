@@ -16,11 +16,16 @@ spec:
     spec:
       serviceAccountName: hermes
       securityContext:
-        fsGroup: 10000
+        fsGroup: 10000 # Correct: ensures persistent volume has read/write permissions for GID 10000
       containers:
         - name: hermes
           image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
+          # Native container security context to drop privileges to 'hermes' user (UID 10000)
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            runAsNonRoot: true
           args: ["gateway", "run"]
           tty: true
           stdin: true
@@ -67,6 +72,11 @@ spec:
         - name: dashboard
           image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
+          # Native container security context to drop privileges to 'hermes' user (UID 10000)
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            runAsNonRoot: true
           args: ["dashboard", "--host", "0.0.0.0", "--port", "9119", "--insecure", "--no-open"]
           env:
             - name: GOOGLE_API_KEY
@@ -85,14 +95,14 @@ spec:
               cpu: "100m"
               memory: "256Mi"
 
-        # The Sandbox: Docker-in-Docker sidecar
+        # The Sandbox: Docker-in-Docker sidecar (Unchanged: needs root and privileged)
         - name: sandbox
           image: docker:dind
           securityContext:
-            privileged: true # Required for DIND
+            privileged: true 
           env:
             - name: DOCKER_TLS_CERTDIR
-              value: "" # Disable TLS for local sidecar communication
+              value: "" 
           resources:
             limits:
               cpu: "500m"
@@ -102,6 +112,3 @@ spec:
               memory: "256Mi"
 
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: hermes-data
