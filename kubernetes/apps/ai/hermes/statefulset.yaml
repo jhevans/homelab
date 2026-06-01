@@ -16,7 +16,7 @@ spec:
     spec:
       serviceAccountName: hermes
       securityContext:
-        fsGroup: 10000 # Correct: ensures persistent volume has read/write permissions for GID 10000
+        fsGroup: 10000
       containers:
         - name: hermes
           image: nousresearch/hermes-agent:main
