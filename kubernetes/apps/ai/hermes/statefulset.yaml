@@ -21,7 +21,6 @@ spec:
         - name: hermes
           image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
-          # Native container security context to drop privileges to 'hermes' user (UID 10000)
           securityContext:
             runAsUser: 10000
             runAsGroup: 10000
@@ -72,7 +71,6 @@ spec:
         - name: dashboard
           image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
-          # Native container security context to drop privileges to 'hermes' user (UID 10000)
           securityContext:
             runAsUser: 10000
             runAsGroup: 10000
@@ -94,8 +92,7 @@ spec:
             requests:
               cpu: "100m"
               memory: "256Mi"
-
-        # The Sandbox: Docker-in-Docker sidecar (Unchanged: needs root and privileged)
+              
         - name: sandbox
           image: docker:dind
           securityContext:
