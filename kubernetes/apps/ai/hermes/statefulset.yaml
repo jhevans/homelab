@@ -21,6 +21,10 @@ spec:
         - name: hermes
           image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            runAsNonRoot: true
           args: ["gateway", "run"]
           tty: true
           stdin: true
@@ -67,6 +71,10 @@ spec:
         - name: dashboard
           image: nousresearch/hermes-agent:main
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            runAsNonRoot: true
           args: ["dashboard", "--host", "0.0.0.0", "--port", "9119", "--insecure", "--no-open"]
           env:
             - name: GOOGLE_API_KEY
@@ -84,15 +92,14 @@ spec:
             requests:
               cpu: "100m"
               memory: "256Mi"
-
-        # The Sandbox: Docker-in-Docker sidecar
+              
         - name: sandbox
           image: docker:dind
           securityContext:
-            privileged: true # Required for DIND
+            privileged: true 
           env:
             - name: DOCKER_TLS_CERTDIR
-              value: "" # Disable TLS for local sidecar communication
+              value: "" 
           resources:
             limits:
               cpu: "500m"
