@@ -109,6 +109,6 @@ spec:
               memory: "256Mi"
 
       volumes:
-       - name: data
+        - name: data
           persistentVolumeClaim:
             claimName: hermes-data
