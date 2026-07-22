@@ -16,6 +16,11 @@ spec:
   values:
     enableRbac: true
     config:
+      settings:
+        cardBlur: sm
+        background:
+          image: https://raw.githubusercontent.com/jhevans/homelab/main/assets/homepage-bg.jpg
+          opacity: 80
       kubernetes:
         mode: cluster
       services:
